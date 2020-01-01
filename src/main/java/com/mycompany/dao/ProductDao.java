@@ -21,5 +21,7 @@ public interface ProductDao {
     public void delete(Integer id);
 
     public Product findById(Integer id);
+
+    public List<Product> findByUserCriteria(String searchCriteria);
     
 }

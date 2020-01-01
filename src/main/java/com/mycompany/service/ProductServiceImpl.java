@@ -40,4 +40,10 @@ public class ProductServiceImpl implements ProductService{
         return pdao.findById(id);
     }
 
+    @Override
+    public List<Product> findProductsByUserCriteria(String searchCriteria) {
+        List<Product> list = pdao.findByUserCriteria(searchCriteria);
+        return list;
+    }
+
 }

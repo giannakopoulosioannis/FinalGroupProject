@@ -18,4 +18,6 @@ public interface ProductService {
 
     public Product findProductById(Integer id);
 
+    public List<Product> findProductsByUserCriteria(String searchCriteria);
+
 }

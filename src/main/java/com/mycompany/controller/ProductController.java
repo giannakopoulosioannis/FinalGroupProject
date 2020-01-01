@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.controller;
 
 import com.mycompany.entities.Product;
@@ -59,5 +54,12 @@ public class ProductController {
         Product p = service.findProductById(id);
         m.addAttribute("product", p);
         return "formProduct";
+    }
+    
+    @GetMapping("/search")
+    public String showProductsByName(@RequestParam("searchCriteria") String searchCriteria, Model m){
+        List<Product> list = service.findProductsByUserCriteria(searchCriteria);
+        m.addAttribute("listOfProduct", list);
+        return "listProduct";
     }
 }
