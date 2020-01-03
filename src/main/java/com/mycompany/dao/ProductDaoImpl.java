@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.dao;
 
 import com.mycompany.entities.Product;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -53,6 +49,20 @@ public class ProductDaoImpl implements ProductDao {
         Product p = (Product) getSession().get(Product.class, id);
         return p;
 
+    }
+
+    @Override
+    public List<Product> findByUserCriteria(String searchCriteria) {
+        if (searchCriteria == "") {
+            return new ArrayList<Product>();
+        } else {
+            Query q = getSession().createQuery("SELECT p FROM Product p WHERE p.pcategory LIKE :pcat OR p.psubcat LIKE :psubcat OR p.pdescr LIKE :pdescr");
+            q.setParameter("pcat", "%" + searchCriteria + "%");
+            q.setParameter("psubcat", "%" + searchCriteria + "%");
+            q.setParameter("pdescr", "%" + searchCriteria + "%");
+            List<Product> list = q.getResultList();
+            return list;
+        }
     }
 
 }
