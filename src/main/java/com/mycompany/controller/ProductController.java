@@ -1,0 +1,63 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.controller;
+
+import com.mycompany.entities.Product;
+import com.mycompany.service.ProductService;
+import java.util.List;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+@RequestMapping("/product")
+public class ProductController {
+
+    @Autowired
+    ProductService service;
+
+    @GetMapping("/list")
+    public String showProducts(Model m) {
+        List<Product> list = service.getAllProducts();
+        m.addAttribute("listOfProduct", list);
+        return "listProduct";
+    }
+
+    @GetMapping("/create")
+    public String showForm(@ModelAttribute("product") Product p) {
+        return "formProduct";
+    }
+
+    @PostMapping("/create")
+    public String createOrUpdateProduct(@Valid Product p, BindingResult result) {
+        if (result.hasErrors()) {
+            return "formProduct";
+        }
+        service.createOrUpdateProduct(p);
+        return "redirect:/product/list";
+    }
+
+    @GetMapping("/delete")
+    public String deleteProduct(@RequestParam("productId") int id) {
+        service.deleteProduct(id);
+        return "redirect:/product/list";
+    }
+
+    @GetMapping("/update")
+    public String showUpdateForm(@RequestParam("productId") Integer id, Model m) {
+
+        Product p = service.findProductById(id);
+        m.addAttribute("product", p);
+        return "formProduct";
+    }
+}
