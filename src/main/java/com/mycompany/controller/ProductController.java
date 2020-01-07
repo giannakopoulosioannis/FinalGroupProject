@@ -60,6 +60,9 @@ public class ProductController {
     public String showProductsByName(@RequestParam("searchCriteria") String searchCriteria, Model m){
         List<Product> list = service.findProductsByUserCriteria(searchCriteria);
         m.addAttribute("listOfProduct", list);
+        if(list.isEmpty()){
+            return "redirect:/";
+        }
         return "listProduct";
     }
 }

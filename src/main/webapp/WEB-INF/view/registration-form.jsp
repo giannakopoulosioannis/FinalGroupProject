@@ -43,11 +43,7 @@
                 <form:input path="email" placeholder="email"/>
                 <form:errors path="email" cssClass="error"/>
             </p>
-            <p>
-                <form:input path="roles" placeholder="role" />
-                <form:errors path="roles" cssClass="error"/>
-            </p>  
-            
+           
             
                <security:authorize access="hasRole('ADMIN')">
             <p>
@@ -58,7 +54,7 @@
 
             <input type="submit" value="Register">
             <hr>
-            <a href="${pageContext.request.contextPath}/">Go back to Login </a>
+            <a href="${pageContext.request.contextPath}/">Home </a>
 
             
         </form:form>

@@ -10,6 +10,8 @@
     <body>
         <h1>Hello admin!</h1>
                 <a href="${pageContext.request.contextPath}/register/showForm">Registration Form</a>
+                <a href="${pageContext.request.contextPath}/message/list">Messages</a>
+                <a href="#">Store</a>
 
     </body>
 </html>

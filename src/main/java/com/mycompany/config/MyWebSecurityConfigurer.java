@@ -37,7 +37,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers("/*/create/**","/*/update/**","/*/delete/**").hasRole("ADMIN")
                 .and()
                 .formLogin() // we are customizing the form login process
-                .loginPage("/loginPage") //show my form at the request mapping
+                .loginPage("/") //show my form at the request mapping
                 .loginProcessingUrl("/authenticate") //Login form will Post data to this Url for processing user 
                 .permitAll()//allow everyone to see Login page.Dont have to be logged in
                 .and().logout().permitAll()

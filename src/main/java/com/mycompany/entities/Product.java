@@ -24,22 +24,26 @@ public class Product implements Serializable{
     private String pcolor;
     private String psize;
     private String pdescr;
+    private String pgender;
     private int pquant;
     private Double pprice;
 
     public Product() {
     }
 
-    public Product(int pcode, String pcategory, String psubcat, String pcolor, String psize, String pdescr, int pquant, Double pprice) {
+    public Product(int pcode, String pcategory, String psubcat, String pcolor, String psize, String pdescr, String pgender, int pquant, Double pprice) {
         this.pcode = pcode;
         this.pcategory = pcategory;
         this.psubcat = psubcat;
         this.pcolor = pcolor;
         this.psize = psize;
         this.pdescr = pdescr;
+        this.pgender = pgender;
         this.pquant = pquant;
         this.pprice = pprice;
     }
+
+    
 
     
     public int getPcode() {
@@ -89,7 +93,7 @@ public class Product implements Serializable{
     public void setPdescr(String pdescr) {
         this.pdescr = pdescr;
     }
-
+    
     public int getPquant() {
         return pquant;
     }
@@ -108,15 +112,16 @@ public class Product implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.pcode;
-        hash = 89 * hash + Objects.hashCode(this.pcategory);
-        hash = 89 * hash + Objects.hashCode(this.psubcat);
-        hash = 89 * hash + Objects.hashCode(this.pcolor);
-        hash = 89 * hash + Objects.hashCode(this.psize);
-        hash = 89 * hash + Objects.hashCode(this.pdescr);
-        hash = 89 * hash + this.pquant;
-        hash = 89 * hash + Objects.hashCode(this.pprice);
+        int hash = 3;
+        hash = 79 * hash + this.pcode;
+        hash = 79 * hash + Objects.hashCode(this.pcategory);
+        hash = 79 * hash + Objects.hashCode(this.psubcat);
+        hash = 79 * hash + Objects.hashCode(this.pcolor);
+        hash = 79 * hash + Objects.hashCode(this.psize);
+        hash = 79 * hash + Objects.hashCode(this.pdescr);
+        hash = 79 * hash + Objects.hashCode(this.pgender);
+        hash = 79 * hash + this.pquant;
+        hash = 79 * hash + Objects.hashCode(this.pprice);
         return hash;
     }
 
@@ -153,6 +158,9 @@ public class Product implements Serializable{
         if (!Objects.equals(this.pdescr, other.pdescr)) {
             return false;
         }
+        if (!Objects.equals(this.pgender, other.pgender)) {
+            return false;
+        }
         if (!Objects.equals(this.pprice, other.pprice)) {
             return false;
         }
@@ -161,7 +169,16 @@ public class Product implements Serializable{
 
     @Override
     public String toString() {
-        return "Product{" + "pcode=" + pcode + ", pcategory=" + pcategory + ", psubcat=" + psubcat + ", pcolor=" + pcolor + ", psize=" + psize + ", pdescr=" + pdescr + ", pquant=" + pquant + ", pprice=" + pprice + '}';
+        return "Product{" + "pcode=" + pcode + ", pcategory=" + pcategory + ", psubcat=" + psubcat + ", pcolor=" + pcolor + ", psize=" + psize + ", pdescr=" + pdescr + ", pgender=" + pgender + ", pquant=" + pquant + ", pprice=" + pprice + '}';
+    }
+
+    
+    public String getPgender() {
+        return pgender;
+    }
+
+    public void setPgender(String pgender) {
+        this.pgender = pgender;
     }
     
     

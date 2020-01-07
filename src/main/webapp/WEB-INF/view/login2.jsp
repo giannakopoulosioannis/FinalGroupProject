@@ -1,4 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,13 +60,10 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">Log in</button>
                 </div>
-                <br>
-                <a href="${pageContext.request.contextPath}/register/showForm">Create new account</a>
-                <br>
-                <a href="${pageContext.request.contextPath}/guest">Enter as Guest</a>
-
+                
+                 
             </form:form>
-
+            <a href="${pageContext.request.contextPath}/">Home</a>
         </div>
     </body>
 </html>                                		                            

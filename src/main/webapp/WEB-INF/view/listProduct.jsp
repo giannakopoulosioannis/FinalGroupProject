@@ -25,21 +25,22 @@
                     <th>Color</th>
                     <th>Size</th>
                     <th>Description</th>
+                    <th>Gender</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th colspan="2">Actions</th>
                 </tr>
             </thead>
-            <c:choose>
+            <%--<c:choose>--%>
 
-                <c:when test="${empty listOfProduct}">
-                    <tbody>
-                        <tr><td colspan="10">No product meet your searching criteria</td></tr>
-                        <tr><td colspan="10">Please try again</td></tr>
-                    </tbody>
-                </c:when>
+                <%--<c:when test="${empty listOfProduct}">--%>
+                    <!--<tbody>-->
+                        <!--<tr><td colspan="10">No product meet your searching criteria</td></tr>-->
+                        <!--<tr><td colspan="10">Please try again</td></tr>-->
+                    <!--</tbody>-->
+                <%--</c:when>--%>
 
-                <c:otherwise>
+                <%--<c:otherwise>--%>
                     <c:forEach items="${listOfProduct}" var="p">
                         <c:url var="deleteLink" value="/product/delete">
                             <c:param name="productId" value="${p.pcode}"/> 
@@ -55,6 +56,7 @@
                                 <td>${p.pcolor}</td>
                                 <td>${p.psize}</td>
                                 <td>${p.pdescr}</td>
+                                <td>${p.pgender}</td>
                                 <td>${p.pquant}</td>
                                 <td>${p.pprice}</td>
                                 <security:authorize access="hasRole('ADMIN')">
@@ -72,9 +74,9 @@
                             </tr>
                         </tbody>
                     </c:forEach>
-                </c:otherwise>
+                <%--</c:otherwise>--%>
 
-            </c:choose>
+            <%--</c:choose>--%>
         </table>
         <a href="${pageContext.request.contextPath}/">Home Page</a>
     </body>
