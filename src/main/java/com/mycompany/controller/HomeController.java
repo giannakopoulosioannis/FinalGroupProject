@@ -28,8 +28,5 @@ public class HomeController {
     public String user(){
         return "user";
     }
-     @RequestMapping("/guest")
-    public String guest(){
-        return "guest";
-    }
+   
 }

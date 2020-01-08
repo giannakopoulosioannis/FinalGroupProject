@@ -33,6 +33,8 @@
             <form:errors path="psize" cssClass="error"/> <br>
             Description: <form:input path="pdescr"/>
             <form:errors path="pdescr" cssClass="error"/> <br>
+            Gender: <form:input path="pgender"/>
+            <form:errors path="pgender" cssClass="error"/> <br>
             Quant: <form:input path="pquant"/>
             <form:errors path="pquant" cssClass="error"/> <br>
             Price: <form:input path="pprice"/>

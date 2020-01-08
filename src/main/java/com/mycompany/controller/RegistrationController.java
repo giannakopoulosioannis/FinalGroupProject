@@ -35,7 +35,14 @@ public class RegistrationController {
     @ModelAttribute("roloi")
     public List<Role> fereRoles(){
         return roleService.getRoles();
+    } 
+    @ModelAttribute("roloi2")
+    public Role  fereRole(){
+        List<Role> list=roleService.getRoles();
+        Role r=list.get(1);
+        return r;
     }
+    
     
     @PostMapping("/processRegistration")
     public String processRegistration(@Valid @ModelAttribute("user") User user, 
