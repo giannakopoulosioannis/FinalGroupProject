@@ -127,6 +127,8 @@
                      <div class="col-md-4">
                             <div class="credits">
                                 <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
+                                 <a href="${pageContext.request.contextPath}/chat">Chat</a>
+
                             </div>
                         </div>
                     </security:authorize>
@@ -137,7 +139,7 @@
                             </div>
                         </div>
                     </security:authorize>
-
+                   
                 </div>
             </div>
         </div>
