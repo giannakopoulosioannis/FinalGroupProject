@@ -28,19 +28,10 @@
                     <th>Gender</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th colspan="2">Actions</th>
+                    <!--<th>Url</th>-->
                 </tr>
             </thead>
-            <%--<c:choose>--%>
-
-                <%--<c:when test="${empty listOfProduct}">--%>
-                    <!--<tbody>-->
-                        <!--<tr><td colspan="10">No product meet your searching criteria</td></tr>-->
-                        <!--<tr><td colspan="10">Please try again</td></tr>-->
-                    <!--</tbody>-->
-                <%--</c:when>--%>
-
-                <%--<c:otherwise>--%>
+          
                     <c:forEach items="${listOfProduct}" var="p">
                         <c:url var="deleteLink" value="/product/delete">
                             <c:param name="productId" value="${p.pcode}"/> 
@@ -59,6 +50,9 @@
                                 <td>${p.pgender}</td>
                                 <td>${p.pquant}</td>
                                 <td>${p.pprice}</td>
+                                <td>
+                                    <img src="${p.purl}" alt="shoe"/>
+                                </td>
                                 <security:authorize access="hasRole('ADMIN')">
                                     <td>
                                         <a href="${deleteLink}"
@@ -74,9 +68,7 @@
                             </tr>
                         </tbody>
                     </c:forEach>
-                <%--</c:otherwise>--%>
-
-            <%--</c:choose>--%>
+            
         </table>
         <a href="${pageContext.request.contextPath}/">Home Page</a>
     </body>

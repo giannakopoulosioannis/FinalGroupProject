@@ -5,6 +5,7 @@ import com.mycompany.entities.User;
 import com.mycompany.service.RoleService;
 import com.mycompany.service.UserService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,7 @@ public class RegistrationController {
     @PostMapping("/processRegistration")
     public String processRegistration(@Valid @ModelAttribute("user") User user, 
             BindingResult result, 
-            Model m){
+            Model m, HttpServletRequest request){
         if(result.hasErrors()){
             return "registration-form";
         }
@@ -57,7 +58,11 @@ public class RegistrationController {
             m.addAttribute("userExistsError","Username exists");
             return "registration-form";
         }
+        if(user.getRoles()==null   || user.getRoles().isEmpty()){
+            user.addRole(new Role(2,"ROLE_USER"));
+        }
         userService.save(user);
+        request.getSession().setAttribute("logedinuser", user);
         return "registration-confirmation";
     }
     

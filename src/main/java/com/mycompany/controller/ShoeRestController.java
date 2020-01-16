@@ -2,7 +2,6 @@ package com.mycompany.controller;
 
 import com.mycompany.entities.Product;
 import com.mycompany.service.ProductService;
-import com.mycompany.service.ShoeService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -27,11 +27,12 @@ public class Product implements Serializable{
     private String pgender;
     private int pquant;
     private Double pprice;
+    private String purl;
 
     public Product() {
     }
 
-    public Product(int pcode, String pcategory, String psubcat, String pcolor, String psize, String pdescr, String pgender, int pquant, Double pprice) {
+    public Product(int pcode, String pcategory, String psubcat, String pcolor, String psize, String pdescr, String pgender, int pquant, Double pprice, String purl) {
         this.pcode = pcode;
         this.pcategory = pcategory;
         this.psubcat = psubcat;
@@ -41,7 +42,18 @@ public class Product implements Serializable{
         this.pgender = pgender;
         this.pquant = pquant;
         this.pprice = pprice;
+        this.purl = purl;
     }
+
+    public String getPurl() {
+        return purl;
+    }
+
+    public void setPurl(String purl) {
+        this.purl = purl;
+    }
+
+   
 
     
 
@@ -112,16 +124,17 @@ public class Product implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + this.pcode;
-        hash = 79 * hash + Objects.hashCode(this.pcategory);
-        hash = 79 * hash + Objects.hashCode(this.psubcat);
-        hash = 79 * hash + Objects.hashCode(this.pcolor);
-        hash = 79 * hash + Objects.hashCode(this.psize);
-        hash = 79 * hash + Objects.hashCode(this.pdescr);
-        hash = 79 * hash + Objects.hashCode(this.pgender);
-        hash = 79 * hash + this.pquant;
-        hash = 79 * hash + Objects.hashCode(this.pprice);
+        int hash = 5;
+        hash = 11 * hash + this.pcode;
+        hash = 11 * hash + Objects.hashCode(this.pcategory);
+        hash = 11 * hash + Objects.hashCode(this.psubcat);
+        hash = 11 * hash + Objects.hashCode(this.pcolor);
+        hash = 11 * hash + Objects.hashCode(this.psize);
+        hash = 11 * hash + Objects.hashCode(this.pdescr);
+        hash = 11 * hash + Objects.hashCode(this.pgender);
+        hash = 11 * hash + this.pquant;
+        hash = 11 * hash + Objects.hashCode(this.pprice);
+        hash = 11 * hash + Objects.hashCode(this.purl);
         return hash;
     }
 
@@ -161,16 +174,23 @@ public class Product implements Serializable{
         if (!Objects.equals(this.pgender, other.pgender)) {
             return false;
         }
+        if (!Objects.equals(this.purl, other.purl)) {
+            return false;
+        }
         if (!Objects.equals(this.pprice, other.pprice)) {
             return false;
         }
         return true;
     }
 
+   
+
     @Override
     public String toString() {
-        return "Product{" + "pcode=" + pcode + ", pcategory=" + pcategory + ", psubcat=" + psubcat + ", pcolor=" + pcolor + ", psize=" + psize + ", pdescr=" + pdescr + ", pgender=" + pgender + ", pquant=" + pquant + ", pprice=" + pprice + '}';
+        return "Product{" + "pcode=" + pcode + ", pcategory=" + pcategory + ", psubcat=" + psubcat + ", pcolor=" + pcolor + ", psize=" + psize + ", pdescr=" + pdescr + ", pgender=" + pgender + ", pquant=" + pquant + ", pprice=" + pprice + ", purl=" + purl + '}';
     }
+
+  
 
     
     public String getPgender() {

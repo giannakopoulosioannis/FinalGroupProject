@@ -25,8 +25,9 @@ public class ProductController {
     public String showProducts(Model m) {
         List<Product> list = service.getAllProducts();
         m.addAttribute("listOfProduct", list);
-        return "listProduct";
+        return "shoesList";
     }
+    
 
     @GetMapping("/create")
     public String showForm(@ModelAttribute("product") Product p) {
@@ -63,6 +64,6 @@ public class ProductController {
         if(list.isEmpty()){
             return "redirect:/";
         }
-        return "listProduct";
+        return "photo";
     }
 }
