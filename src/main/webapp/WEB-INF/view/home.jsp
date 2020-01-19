@@ -13,9 +13,9 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-        <link href="static/css/bootstrap.css" rel="stylesheet">
-        <link href="static/css/bootstrap-theme.css" rel="stylesheet">
-        <link href="static/css/style.css" rel="stylesheet">
+        <link href="${path}/static/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="${path}/static/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="${path}/static/css/style.css" type="text/css" />
     </head>
 
     <body>
@@ -87,16 +87,16 @@
                     <p class="subtitle">Categories</p>
 
                     <ul>
-                        <li><a href="#">MEN</a>
+                        <li><a id="men" href="#">MEN</a>
                             <ul>
-                                <li><a href="#">Lifestyle</a></li>
+                                <li><a id="lifestyle" href="#">Lifestyle</a></li>
                                 <li><a href="#">Running</a></li>
                                 <li><a href="#">Football</a></li>
                                 <li><a href="#">Basketball</a></li>
                                 <li><a href="#">Crossfit</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">WOMEN</a>
+                        <li><a id="women" href="#">WOMEN</a>
                             <ul>
                                 <li><a href="#">Lifestyle</a></li>
                                 <li><a href="#">Running</a></li>
@@ -104,7 +104,7 @@
                                 <li><a href="#">Crossfit</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">KIDS</a>
+                        <li><a id="kids" href="#">KIDS</a>
                             <ul>
                                 <li><a href="#">Lifestyle</a></li>
                                 <li><a href="#">Running</a></li>
@@ -145,7 +145,7 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="static/js/bootstrap.min.js"></script>
+        <script src="${path}/static/js/bootstrap.min.js"></script>
 
         <!--<h1>welcome</h1>-->
         <%--<security:authorize access="hasRole('ADMIN')">--%>
@@ -206,6 +206,23 @@
             $("#skechers").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
+            
+            $("#men").on('click', function (id) {
+                location.href = '${path}/product/men?searchCriteria=' + this.id;
+            });
+            
+            $("#lifestyle").on('click', function (id) {
+                location.href = '${path}/product/search/men/?searchCriteria=' + this.id;
+            });
+            
+            $("#women").on('click', function (id) {
+                location.href = '${path}/product/search?searchCriteria=' + this.id;
+            });
+            
+            $("#kids").on('click', function (id) {
+                location.href = '${path}/product/search?searchCriteria=' + this.id;
+            });
+            
         </script>
 
     </body>

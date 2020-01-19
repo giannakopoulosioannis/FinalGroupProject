@@ -56,13 +56,26 @@ public class ProductDaoImpl implements ProductDao {
         if (searchCriteria == "") {
             return new ArrayList<Product>();
         } else {
-            Query q = getSession().createQuery("SELECT p FROM Product p WHERE p.pcategory LIKE :pcat OR p.psubcat LIKE :psubcat OR p.pdescr LIKE :pdescr");
+            Query q = getSession().createQuery("SELECT p FROM Product p WHERE p.pcategory LIKE :pcat OR p.psubcat LIKE :psubcat OR p.pdescr LIKE :pdescr OR p.pgender LIKE :pgender");
             q.setParameter("pcat", "%" + searchCriteria + "%");
             q.setParameter("psubcat", "%" + searchCriteria + "%");
             q.setParameter("pdescr", "%" + searchCriteria + "%");
+            q.setParameter("pgender", "%" + searchCriteria + "%");
             List<Product> list = q.getResultList();
             return list;
         }
     }
 
+    @Override
+    public List<Product> findByGender(String searchCriteria, String pgender) {
+        
+        if (searchCriteria == "") {
+            return new ArrayList<Product>();
+        } else {
+            Query q = getSession().createNativeQuery("SELECT * FROM product where pgender='"+pgender+"' && pdescr ='" + searchCriteria+"'");
+            
+            List<Product> list = q.getResultList();
+            return list;
+        }
+    }
 }
