@@ -208,11 +208,11 @@
             });
             
             $("#men").on('click', function (id) {
-                location.href = '${path}/product/men?searchCriteria=' + this.id;
+                location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
             
             $("#lifestyle").on('click', function (id) {
-                location.href = '${path}/product/search/men/?searchCriteria=' + this.id;
+                location.href = '${path}/product/men/?searchCriteria=' + this.id;
             });
             
             $("#women").on('click', function (id) {

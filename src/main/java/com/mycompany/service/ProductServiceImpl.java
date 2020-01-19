@@ -51,5 +51,5 @@ public class ProductServiceImpl implements ProductService{
         List<Product> list = pdao.findByGender(searchCriteria, pgender);
         return list;
     }
-
+    
 }
