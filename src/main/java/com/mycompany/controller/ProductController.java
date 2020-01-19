@@ -65,7 +65,7 @@ public class ProductController {
         if(list.isEmpty()){
             return "redirect:/";
         }
-        return "listProduct";
+        return "productList";
     }
     
     @GetMapping("/search/{pgender}")
@@ -74,7 +74,7 @@ public class ProductController {
             @RequestParam("searchCriteria") String searchCriteria, Model m){
         List<Product> list = service.findProductsByGender(searchCriteria, pgender);
         m.addAttribute("listOfProduct", list);
-        
-        return "productList";
+        m.addAttribute("pgender", pgender);
+        return "listProduct";
     }
 }
