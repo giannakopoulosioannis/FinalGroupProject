@@ -20,4 +20,6 @@ public interface ProductService {
 
     public List<Product> findProductsByUserCriteria(String searchCriteria);
 
+    public List<Product> findProductsByGender(String searchCriteria, String pgender);
+
 }

@@ -14,6 +14,11 @@
         <title>Product list</title>
     </head>
     <body ng-app="Shoes">
+        
+        <security:authorize access="hasRole('ADMIN')">
+
+            <a href="${pageContext.request.contextPath}/product/create">Create Product</a>
+        </security:authorize>
 
         <table border="1" class="shadow" ng-controller="ShoesCtrlr">
             <thead>
@@ -49,7 +54,11 @@
                     <th ng-click="filterKeyword = 'price';reverse = !reverse">
                         <div class="d-flex justify-content-between">Price <i class="fas fa-sort"></i>
                         </div>
-                    </th>
+<!--                    </th>
+                    <th ng-click="filterKeyword = 'url';reverse = !reverse">
+                        <div class="d-flex justify-content-between">Photo <i class="fas fa-sort"></i>
+                        </div>
+                    </th>-->
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +71,9 @@
                     <td>{{ shoe.pdescr | uppercase }}</td>
                     <td>{{ shoe.pquant | uppercase }}</td>
                     <td>{{ shoe.pprice | uppercase }}</td>
+<!--                    <td>
+                        <img src="{{shoe.purl}}" alt="shoe"/>
+                    </td>-->
                 </tr>
             </tbody>
         </table>

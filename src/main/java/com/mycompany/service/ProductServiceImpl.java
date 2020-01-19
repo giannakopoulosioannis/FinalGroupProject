@@ -46,4 +46,10 @@ public class ProductServiceImpl implements ProductService{
         return list;
     }
 
+    @Override
+    public List<Product> findProductsByGender(String searchCriteria, String pgender) {
+        List<Product> list = pdao.findByGender(searchCriteria, pgender);
+        return list;
+    }
+
 }
