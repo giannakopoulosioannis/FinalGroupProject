@@ -2,6 +2,7 @@ package com.mycompany.controller;
 
 import com.mycompany.entities.OrderDetail;
 import com.mycompany.entities.Product;
+import com.mycompany.service.OrderHistory;
 import com.mycompany.service.OrderService;
 import com.mycompany.service.PaypalService;
 import com.paypal.api.payments.PayerInfo;
@@ -31,6 +32,8 @@ public class PaypalController {
     PaypalService service;
     @Autowired
     OrderService orderService;
+    
+   
 
     @GetMapping("/cancel")
     public String cancelPay() {
@@ -103,6 +106,7 @@ public class PaypalController {
             model.addAttribute("payer", payerInfo);
             model.addAttribute("transaction", transaction);
             request.getSession().removeAttribute("cart");
+            
             
             return "receipt";
         } catch (PayPalRESTException ex) {

@@ -9,9 +9,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home Page</title>
+
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-
         <link href="${path}/static/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="${path}/static/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="${path}/static/css/style.css" type="text/css" />
@@ -31,29 +32,28 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-<!--                                   <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
+                            <security:authorize access="!hasRole('USER') and !hasRole('ADMIN')">
 
-                            <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>-->
+                                <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
 
-                            <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-                                <li>
-
-                                    <a href="#">Shopping cart 
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <strong id="num">0</strong>
-                                    </a>
-
-                                    
-
+                                <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>
+                                </security:authorize>
+                                <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+                                <li class="padding_li_nav" >
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <strong id="num">0</strong> <br>
                                 </li>
                                 <li class="padding_li_nav">
-                                    <span class="shopping" id="total">Total: <span id="total">0</span></span>
+                                    <span class="shopping" id="total">Total: <span id="total">0</span>
+                                </li>
+                                <li class="">
                                     <a href="${pageContext.request.contextPath}/checkout">Checkout</a>
                                 </li>
-                                <li class="padding_li_nav">
-                                    <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                                        <button type="submit" >Logout <i class="fas fa-sign-out-alt"></i></button>
-                                     </form:form>
+
+                                <li class="padding_li_nav"> <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                        <button type="submit">Logout  <i class="fas fa-sign-out-alt"></i></button>
+
+                                    </form:form>
                                 </li>
                             </security:authorize>
                         </ul>
@@ -72,7 +72,7 @@
                         <div class="card">
                             <div class="filter-group">
                                 <h4 class="title">Product type</h4>
-                                <div class="filter-content show" id="f">
+                                <div class="filter-content show" >
                                     <div class="card-body">
                                         <form:form action="${path}/product/search" method="GET">
                                             <div class="input-group">
@@ -80,6 +80,7 @@
                                                 <input type="submit" class="fa fa-search" value="&#xf002">
                                             </div>
                                         </form:form>
+
                                         <ul class="list-menu" id="accordion">
                                             <li>
                                                 <h4 id="men" onclick="showHide('subcat_men')">Men 
@@ -122,7 +123,7 @@
                             </div>
                             <div class="filter-group">
                                 <h4 class="title">Brands</h4>
-                                <div class="filter-content show" id="ff">
+                                <div class="filter-content show" >
                                     <div class="card-body">
                                         <input id="adidas" type="checkbox" name="brand" value="adidas">
                                         <label class="label_check">Adidas</label>
@@ -203,7 +204,7 @@
                                             <span class="btn btn-light">35</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input type="checkbox"name="size" value="36">
+                                            <input type="checkbox" name="size" value="36">
                                             <span class="btn btn-light">36</span>
                                         </label>
                                         <label class="checkbox-btn">
@@ -253,7 +254,7 @@
                     </div>
                     <c:forEach items="${listOfProduct}" var="p">
                         <div class="products">
-                            <div class="col-md-9 product_item" data-brand="${p.pcategory}" data-size="${p.psize}">
+                            <div class="col-md-9 shadow product_item" data-brand="${p.pcategory}" data-size="${p.psize}">
                                 <div class="card">
                                     <div class="row product_item_container shadow">
                                         <div class="col-md-3">
@@ -261,178 +262,169 @@
                                                 <img src="${p.purl}">
                                             </a>
                                         </div>
-
                                         <div class="col-md-6">
                                             <div class="">
-                                                <h3>
-                                                    <a href="#" class=""> ${p.pcategory} ${p.psubcat} </a>
-                                                </h3>
-                                                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing 
+                                                <h3><a href="#" class=""> ${p.pcategory} ${p.psubcat} </a></h3>
+
+                                                <p> ${p.pdescr} Lorem ipsum dolor sit amet, consectetuer adipiscing 
                                                     elit, Ut wisi enim ad minim veniam </p>
-                                                <p>${p.pdescr}<span class="totheRight">Size ${p.psize}</span></p>
+                                                <p> ${p.pdescr} <span class="totheRight">Size ${p.psize}</span></p>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="">
-                                                <p >€ <span class="productPrice">${p.pprice}</span></p>
+                                                <p>€ <span class="productPrice">${p.pprice}</span></p>
                                                     <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-                                                    <button class="btn btn-primary btn-block" id="AddToCart" onclick="addToCart(${p.pcode})"> Add to Cart </button>
+                                                    <button class="btn btn-primary btn-block" id="AddToCart" onclick="addToCart(${p.pcode})">add to cart </button>
                                                 </security:authorize>
                                             </div>
-                                   
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>                         
 
                     </c:forEach>
 
                 </div>
         </main>
-               <footer>
-                    <div id="footer" class="">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <p class="copyright">&copy; 2020</p>
+        <footer>
+            <div id="footer" class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="copyright">&copy; 2020</p>
+                        </div>
+                        <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+                            <div class="col-md-4">
+                                <div class="credits">
+                                    <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
+                                    <a href="${pageContext.request.contextPath}/chat">Chat</a>
+
                                 </div>
-        <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-            <div class="col-md-4">
-                <div class="credits">
-                    <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
-                    <a href="${pageContext.request.contextPath}/chat">Chat</a>
-    
+                            </div>
+
+                        </security:authorize>
+                        <security:authorize access="hasRole('ADMIN')">
+                            <div class="col-md-4">
+                                <div class="credits">
+                                    <a href="${pageContext.request.contextPath}/admin">Admin</a>
+                                </div>
+                            </div>
+                        </security:authorize>
+
+                    </div>
                 </div>
             </div>
-
-        </security:authorize>
-        <security:authorize access="hasRole('ADMIN')">
-            <div class="col-md-4">
-                <div class="credits">
-                    <a href="${pageContext.request.contextPath}/admin">Admin</a>
-                </div>
-            </div>
-        </security:authorize>
-    
-    </div>
-    </div>
-    </div>
-    </footer>
-        
-
-
-
-
+        </footer>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+
         <script src="${path}/static/js/bootstrap.min.js"></script>
 
         <script>
-            var num = 0;
-            var total=0;
-            function addToCart(productId) {
-                $.post("/GroupProject/add/cart/" + productId,
-                        function (data, status) {
-                            console.log(status)
-                            if (status == "success" ) {
-                                num += 1
-                                //alert("Success");
-                                $("#num").text(num);
-                                $("#total").text("Total: "+data);
-                            } else {
-                                alert("Please retry");
+                                                        var num = 0;
+                                                        var total = 0;
+                                                        function addToCart(productId) {
+                                                            $.post("/GroupProject/add/cart/" + productId,
+                                                                    function (data, status) {
+                                                                        console.log(status)
+                                                                        if (status == "success") {
+                                                                            num += 1
+                                                                            alert("Success");
+                                                                            $("#num").text(num);
+                                                                            $("#total").text("Total: " + data);
+                                                                        } else {
+                                                                            alert("Please retry");
+                                                                        }
+                                                                    });
+                                                        }
+        </script>
+        <script>
+            function showHide(id) {
+                let e = document.getElementById(id);
+                if (e.style.display == 'block')
+                    e.style.display = 'none';
+                else
+                    e.style.display = 'block';
+            }
+
+            $(document).ready(function () {
+                $('#searchAll').keyup(function () {
+                    let entry = $(this).val();
+                    $('.product_item').hide();
+                    $('.product_item:contains("' + entry + '")').show();
+                });
+                $('input[name="brand"]').click(function () {
+                    if ($('input[name="brand"]:checked').length > 0) {
+                        $('.products >div').hide();
+                        $('input[name="brand"]:checked').each(function () {
+                            $('.products >div[data-brand=' + this.value + ']').show();
+                        });
+                    } else {
+                        $('.products >div').show();
+                    }
+                });
+                $('input[name="size"]').click(function () {
+                    if ($('input[name="size"]:checked').length > 0) {
+                        $('.products >div').hide();
+                        $('input[name="size"]:checked').each(function () {
+                            $('.products >div[data-size=' + this.value + ']').show();
+                        });
+                    } else {
+                        $('.products >div').show();
+                    }
+                });
+                const priceSlider = $("#priceSlider");
+                priceSlider.on("change", (e) => {
+                    $("#volume").text(e.target.value);
+                    let volume = $("#volume").text();
+//                    console.log(volume);
+                    $(".product_item .productPrice").filter(function () {
+//                        console.log(parseInt($(this).text()));
+                        $(".product_item").each(function () {
+                            while (parseInt($(".productPrice").text() > 100)) {
+                                $(".product_item").hide();
                             }
                         });
-            }
+                    });
+                });
+            });
+
+
         </script>
 
+
+
+        <!--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+
+
+
         <script>
+            $(document).ready(function () {
+                $('#searchAll').keyup(function () {
+                    let entry = $(this).val();
+                    $('.product_item').hide();
+                    $('.product_item:contains("' + entry + '")').show();
+                });
+                const priceSlider = $("#priceSlider");
+                priceSlider.on("change", (e) => {
 
-                                                    function showHide(id) {
-                                                        let e = document.getElementById(id);
-                                                        if (e.style.display == 'block')
-                                                            e.style.display = 'none';
-                                                        else
-                                                            e.style.display = 'block';
-                                                    }
+                    $("#volume").text(e.target.value);
+                    let volume = $("#volume").text();
+                    console.log(volume);
 
-//            $("#women").on('click', function (id) {
-//                location.href = '${path}/product/search?searchCriteria=' + this.id;
-//            });
-//
-//            $("#kids").on('click', function (id) {
-//                location.href = '${path}/product/search?searchCriteria=' + this.id;
-//            });
+                    $(".product_item .productPrice").filter(function () {
+                        console.log(parseInt($(this).text()));
+                        $(".product_item").each(function () {
 
-                                                    $(document).ready(function () {
-                                                        $('#searchAll').keyup(function () {
-                                                            let entry = $(this).val();
-                                                            $('.product_item').hide();
-                                                            $('.product_item:contains("' + entry + '")').show();
-                                                        });
+                            while (parseInt($(".productPrice").text() > 100)) {
+                                $(".product_item").hide();
 
-                                                        $('input[name="brand"]').click(function () {
-                                                            if ($('input[name="brand"]:checked').length > 0) {
-                                                                $('.products >div').hide();
-                                                                $('input[name="brand"]:checked').each(function () {
-                                                                    $('.products >div[data-brand=' + this.value + ']').show();
-                                                                });
-                                                            } else {
-                                                                $('.products >div').show();
-                                                            }
-                                                        });
-
-                                                        $('input[name="size"]').click(function () {
-                                                            if ($('input[name="size"]:checked').length > 0) {
-                                                                $('.products >div').hide();
-                                                                $('input[name="size"]:checked').each(function () {
-                                                                    $('.products >div[data-size=' + this.value + ']').show();
-                                                                });
-                                                            } else {
-                                                                $('.products >div').show();
-                                                            }
-                                                        });
-
-                                                        const priceSlider = $("#priceSlider");
-                                                        priceSlider.on("change", (e) => {
-                                                            $("#volume").text(e.target.value);
-                                                            let volume = $("#volume").text();
-//                    console.log(volume);
-                                                            $(".product_item .productPrice").filter(function () {
-//                        console.log(parseInt($(this).text()));
-                                                                $(".product_item").each(function () {
-
-                                                                    while (parseInt($(".productPrice").text() > 100)) {
-                                                                        $(".product_item").hide();
-
-                                                                    }
-                                                                });
-                                                            });
-                                                        });
-                                                    });
-//                    $("#volume").text(e.target.value);
-//                    let volume = $("#volume").text();
-//                    let price = $("productPrice").text();
-//                    if (price >= volume) { //2000 is the amount where you want the event to trigger
-//                        $('.product_item').hide();
-//                    } else {
-//                        $('.product_item').show();
-//                    }
-//                    $(".product_item").each(function () {
-//                        
-//                    $(".productPrice").each(function () {
-//                        let price = $(".productPrice").html();
-//                        
-//                        console.log(price);
-////                        let volume = $("#volume").text();
-////                        console.log(price-volume);
-//                        
-////                        if ((price - volume) < 0){
-////                            $(this).hide();
-////                        }else{
-////                            $(this).show();
-////                        }
-//                         });
-//                    });
+                            }
+                        });
+                    });
+                });
+            });
 
 
         </script>

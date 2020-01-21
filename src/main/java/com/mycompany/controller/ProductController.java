@@ -67,8 +67,8 @@ public class ProductController {
         }
         return "productList";
     }
-    
-    @GetMapping("/men")
+
+      @GetMapping("/men")
     public String showProductsForMen(@RequestParam("category") String category, Model m){
         List<Product> list = service.findProductsForMen(category);
         m.addAttribute("listOfProduct", list);
@@ -92,4 +92,4 @@ public class ProductController {
         return "productList";
     }
     
- }
+}

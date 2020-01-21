@@ -28,7 +28,7 @@
                 <form:errors path="username" cssClass="error"/>
             </p>
             <p>
-                <form:input path="password" placeholder="password"/>
+                <form:input type="password" path="password" placeholder="password"/>
                 <form:errors path="password" cssClass="error"/>
             </p>
             <p>
