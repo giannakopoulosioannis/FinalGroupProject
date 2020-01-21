@@ -26,7 +26,7 @@ public class ProductController {
     public String showProducts( Model m ) {
         List<Product> list = service.getAllProducts();
         m.addAttribute("listOfProduct", list);
-        return "productList";
+        return "listProduct";
     }
     
 
@@ -92,8 +92,4 @@ public class ProductController {
         return "productList";
     }
     
-    @GetMapping("/cart")
-    public String showCart() {
-        return "shoppingCart";
-    }
-}
+ }

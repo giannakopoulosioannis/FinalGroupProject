@@ -31,26 +31,29 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
+<!--                                   <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
 
-                            <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>
+                            <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>-->
 
                             <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
                                 <li>
+
                                     <a href="#">Shopping cart 
                                         <i class="fas fa-shopping-cart"></i>
-                                        <strong>0</strong>
+                                        <strong id="num">0</strong>
                                     </a>
+
+                                    
+
                                 </li>
                                 <li class="padding_li_nav">
-                                    <span class="shopping">Total: 
-                                        <span id="total">0</span>
-                                    </span>
+                                    <span class="shopping" id="total">Total: <span id="total">0</span></span>
+                                    <a href="${pageContext.request.contextPath}/checkout">Checkout</a>
                                 </li>
                                 <li class="padding_li_nav">
                                     <form:form action="${pageContext.request.contextPath}/logout" method="POST">
                                         <button type="submit" >Logout <i class="fas fa-sign-out-alt"></i></button>
-                                        </form:form>
+                                     </form:form>
                                 </li>
                             </security:authorize>
                         </ul>
@@ -65,10 +68,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
+
                         <div class="card">
                             <div class="filter-group">
                                 <h4 class="title">Product type</h4>
-                                <div class="filter-content show" id="">
+                                <div class="filter-content show" id="f">
                                     <div class="card-body">
                                         <form:form action="${path}/product/search" method="GET">
                                             <div class="input-group">
@@ -118,7 +122,7 @@
                             </div>
                             <div class="filter-group">
                                 <h4 class="title">Brands</h4>
-                                <div class="filter-content show" id="">
+                                <div class="filter-content show" id="ff">
                                     <div class="card-body">
                                         <input id="adidas" type="checkbox" name="brand" value="adidas">
                                         <label class="label_check">Adidas</label>
@@ -148,16 +152,17 @@
                                         <label class="label_check">Reebok</label>
                                         <input id="skechers" type="checkbox" name="brand" value="skechers">
                                         <label class="label_check">Skechers</label>
+
                                     </div>
                                 </div>
                             </div>
                             <hr />
                             <div class="filter-group">
                                 <h4 class="title">Price range</h4>
-                                <div class="filter-content show" id="">
+                                <div class="filter-content show" id="pp">
                                     <div class="card-body">
                                         <div class="input-group ">
-                                            <input id="priceSlider" type="range" name="" max="200">
+                                            <input id="priceSlider" type="range" name="slider" max="200">
                                             <label for="priceSlider" >
                                                 <span >Max &euro;</span>
                                                 <span id="volume">200</span>
@@ -169,7 +174,9 @@
                             <hr />
                             <div class="filter-group">
                                 <h4 class="title">Sizes</h4>
+
                                 <div class="filter-content show" id="size_filters">
+
                                     <div class="card-body">
                                         <label class="checkbox-btn">
                                             <input type="checkbox" name="size" value="30">
@@ -254,6 +261,7 @@
                                                 <img src="${p.purl}">
                                             </a>
                                         </div>
+
                                         <div class="col-md-6">
                                             <div class="">
                                                 <h3>
@@ -268,63 +276,74 @@
                                             <div class="">
                                                 <p >€ <span class="productPrice">${p.pprice}</span></p>
                                                     <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-                                                    <button class="btn btn-primary btn-block"> Add to Cart </button>
+                                                    <button class="btn btn-primary btn-block" id="AddToCart" onclick="addToCart(${p.pcode})"> Add to Cart </button>
                                                 </security:authorize>
                                             </div>
-                                        </div>
+                                   
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </c:forEach>
+
                 </div>
         </main>
-        <footer>
-            <div id="footer" class="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p class="copyright">&copy; 2020</p>
-                        </div>
-                        <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-                            <div class="col-md-4">
-                                <div class="credits">
-                                    <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
-                                    <a href="${pageContext.request.contextPath}/chat">Chat</a>
-
+               <footer>
+                    <div id="footer" class="">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p class="copyright">&copy; 2020</p>
                                 </div>
-                            </div>
-                        </security:authorize>
-                        <security:authorize access="hasRole('ADMIN')">
-                            <div class="col-md-4">
-                                <div class="credits">
-                                    <a href="${pageContext.request.contextPath}/admin">Admin</a>
-                                </div>
-                            </div>
-                        </security:authorize>
-
-                    </div>
+        <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+            <div class="col-md-4">
+                <div class="credits">
+                    <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
+                    <a href="${pageContext.request.contextPath}/chat">Chat</a>
+    
                 </div>
             </div>
-        </footer>
+
+        </security:authorize>
+        <security:authorize access="hasRole('ADMIN')">
+            <div class="col-md-4">
+                <div class="credits">
+                    <a href="${pageContext.request.contextPath}/admin">Admin</a>
+                </div>
+            </div>
+        </security:authorize>
+    
+    </div>
+    </div>
+    </div>
+    </footer>
+        
+
+
+
+
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
         <script src="${path}/static/js/bootstrap.min.js"></script>
 
-        <!--<h1>welcome</h1>-->
-        <%--<security:authorize access="hasRole('ADMIN')">--%>
-            <!--<a href="${pageContext.request.contextPath}/admin">Admin page</a>--> 
-        <%--</security:authorize>--%>
-        <!--<br>-->
-        <!--<a href="${pageContext.request.contextPath}/product/list">Shoes</a>-->
-        <!--<br>-->
-        <%--<security:authorize access="hasRole('USER')">--%> 
-            <!--<a href="${pageContext.request.contextPath}/user">User page</a>--> 
-        <%--</security:authorize>--%>
-        <!--<hr>-->
-        <%--<form:form action="${pageContext.request.contextPath}/logout" method="POST">--%>
-        <!--<input type="submit" value="Logout">-->
-
-        <%--</form:form>--%>
+        <script>
+            var num = 0;
+            var total=0;
+            function addToCart(productId) {
+                $.post("/GroupProject/add/cart/" + productId,
+                        function (data, status) {
+                            console.log(status)
+                            if (status == "success" ) {
+                                num += 1
+                                //alert("Success");
+                                $("#num").text(num);
+                                $("#total").text("Total: "+data);
+                            } else {
+                                alert("Please retry");
+                            }
+                        });
+            }
+        </script>
 
         <script>
 
@@ -414,6 +433,7 @@
 ////                        }
 //                         });
 //                    });
+
 
         </script>
 

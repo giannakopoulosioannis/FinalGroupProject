@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
+
 <!DOCTYPE html>
 <html>
     <c:set var="path" value="${pageContext.request.contextPath}"/>
@@ -31,9 +32,20 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
+                        <security:authorize access="!hasRole('USER') and !hasRole('ADMIN')">
+                            <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
+                            </security:authorize>
 
-                        <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>
+
+                        <security:authorize access="!hasRole('USER') and !hasRole('ADMIN')">
+                            <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>
+                            </security:authorize>
+
+
+                        <security:authorize access="isAuthenticated()">
+                            <li><a><security:authentication property="principal.username" /> ${principal.username}</a></li>
+                            </security:authorize>
+
                         <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
                             <li class="padding_li_nav">
                                 <form:form action="${pageContext.request.contextPath}/logout" method="POST">
@@ -123,23 +135,24 @@
                     <div class="col-md-4">
                         <p class="copyright">&copy; Copyright 2020 All rights reserved</p>
                     </div>
+                <a href="${pageContext.request.contextPath}/chat">Chat</a>
+
                     <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-                     <div class="col-md-4">
+                        <div class="col-md-4">
                             <div class="credits">
                                 <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
-                                 <a href="${pageContext.request.contextPath}/chat">Chat</a>
 
                             </div>
                         </div>
                     </security:authorize>
                     <security:authorize access="hasRole('ADMIN')">
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="credits">
                                 <a href="${pageContext.request.contextPath}/admin">Admin</a>
                             </div>
                         </div>
                     </security:authorize>
-                   
+
                 </div>
             </div>
         </div>
@@ -206,15 +219,15 @@
             $("#skechers").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
-            
+
             $("#men").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
-            
+
             $("#women").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
-            
+
             $("#kids").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });           
@@ -283,7 +296,7 @@
                 let data = this.innerText.toLowerCase();
                 location.href = '${path}/product/kids?category=' + data;
             });
-            
+
         </script>
 
     </body>

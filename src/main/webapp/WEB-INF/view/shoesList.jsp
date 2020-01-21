@@ -14,7 +14,7 @@
         <title>Product list</title>
     </head>
     <body ng-app="Shoes">
-        
+
         <security:authorize access="hasRole('ADMIN')">
 
             <a href="${pageContext.request.contextPath}/product/create">Create Product</a>
@@ -54,28 +54,45 @@
                     <th ng-click="filterKeyword = 'price';reverse = !reverse">
                         <div class="d-flex justify-content-between">Price <i class="fas fa-sort"></i>
                         </div>
-<!--                    </th>
-                    <th ng-click="filterKeyword = 'url';reverse = !reverse">
-                        <div class="d-flex justify-content-between">Photo <i class="fas fa-sort"></i>
-                        </div>
-                    </th>-->
+                        <!--                    </th>
+                                            <th ng-click="filterKeyword = 'url';reverse = !reverse">
+                                                <div class="d-flex justify-content-between">Photo <i class="fas fa-sort"></i>
+                                                </div>
+                                            </th>-->
                 </tr>
             </thead>
-            <tbody>
-                <tr ng-repeat="shoe in shoes| filter:selected | orderBy:filterKeyword:reverse ">
-                    <td>{{ shoe.pcode | uppercase }}</td>
-                    <td>{{ shoe.pcategory | uppercase }}</td>
-                    <td>{{ shoe.psubcat | uppercase }}</td>
-                    <td>{{ shoe.pcolor | uppercase }}</td>
-                    <td>{{ shoe.psize | uppercase }}</td>
-                    <td>{{ shoe.pdescr | uppercase }}</td>
-                    <td>{{ shoe.pquant | uppercase }}</td>
-                    <td>{{ shoe.pprice | uppercase }}</td>
-<!--                    <td>
-                        <img src="{{shoe.purl}}" alt="shoe"/>
-                    </td>-->
-                </tr>
-            </tbody>
+            <c:forEach items="${listOfProduct}" var="p">
+                <c:url var="deleteLink" value="/product/delete">
+                    <c:param name="productId" value="${p.pcode}"/> 
+                </c:url>
+                <c:url var="updateLink" value="/product/update">
+                    <c:param name="productId" value="${p.pcode}"/> 
+                </c:url>
+                <tbody>
+                    <tr ng-repeat="shoe in shoes| filter:selected | orderBy:filterKeyword:reverse ">
+                        <td>{{ shoe.pcode | uppercase }}</td>
+                        <td>{{ shoe.pcategory | uppercase }}</td>
+                        <td>{{ shoe.psubcat | uppercase }}</td>
+                        <td>{{ shoe.pcolor | uppercase }}</td>
+                        <td>{{ shoe.psize | uppercase }}</td>
+                        <td>{{ shoe.pdescr | uppercase }}</td>
+                        <td>{{ shoe.pquant | uppercase }}</td>
+                        <td>{{ shoe.pprice | uppercase }}</td>
+                        <security:authorize access="hasRole('ADMIN')">
+                            <td>
+                                <a href="${deleteLink}"
+                                   onclick="if (!(confirm('Are you sure?')))
+                                                               return false">Delete</a>
+
+                            </td>
+                            <td>
+                                <a href="${updateLink}">Update</a>
+                            </td>
+                        </security:authorize>
+                    </tr>
+                </tbody>
+            </c:forEach>
+
         </table>
         <a href="${path}/">Home Page</a>
         <script>
