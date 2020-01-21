@@ -43,8 +43,26 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> findProductsByGender(String searchCriteria, String pgender) {
-        List<Product> list = pdao.findByGender(searchCriteria, pgender);
+    public List<Product> findProductsByGender(String pgender, String pdescr) {
+        List<Product> list = pdao.findByGender(pgender, pdescr);
+        return list;
+    }
+
+    @Override
+    public List<Product> findProductsForMen(String category) {
+        List<Product> list = pdao.findForMen(category);
+        return list;
+    }
+
+    @Override
+    public List<Product> findProductsForWomen(String category) {
+        List<Product> list = pdao.findForWomen(category);
+        return list;
+    }
+
+    @Override
+    public List<Product> findProductsForKids(String category) {
+        List<Product> list = pdao.findForKids(category);
         return list;
     }
     
