@@ -295,11 +295,12 @@
                         <div class="col-md-4">
                             <p class="copyright">&copy; 2020</p>
                         </div>
+                        <a href="${pageContext.request.contextPath}/chat">Chat</a>
+
                         <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
                             <div class="col-md-4">
                                 <div class="credits">
                                     <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
-                                    <a href="${pageContext.request.contextPath}/chat">Chat</a>
 
                                 </div>
                             </div>
@@ -322,22 +323,22 @@
         <script src="${path}/static/js/bootstrap.min.js"></script>
 
         <script>
-                                                        var num = 0;
-                                                        var total = 0;
-                                                        function addToCart(productId) {
-                                                            $.post("/GroupProject/add/cart/" + productId,
-                                                                    function (data, status) {
-                                                                        console.log(status)
-                                                                        if (status == "success") {
-                                                                            num += 1
-                                                                            alert("Success");
-                                                                            $("#num").text(num);
-                                                                            $("#total").text("Total: " + data);
-                                                                        } else {
-                                                                            alert("Please retry");
-                                                                        }
-                                                                    });
-                                                        }
+              var num = 0;
+              var total = 0;
+              function addToCart(productId) {
+               $.post("/GroupProject/add/cart/" + productId,
+               function (data, status) {
+                 console.log(status);
+                  if (status == "success") {
+//                     alert("Success");
+                     num+=1;
+                      $("#num").text(num);
+                      $("#total").text("Total: " + data);
+                       } else {
+                        alert("Please retry");
+                         }
+                         });
+                      }
         </script>
         <script>
             function showHide(id) {
@@ -395,7 +396,7 @@
 
 
 
-        <!--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 
 

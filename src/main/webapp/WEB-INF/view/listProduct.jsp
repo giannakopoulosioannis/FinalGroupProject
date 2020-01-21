@@ -17,7 +17,18 @@
             <a href="${pageContext.request.contextPath}/product/create">Create Product</a>
         </security:authorize>
 
-        <table border="1">
+            <table border="1" class="shadow">
+            <tr>
+                    <td>Code</td>
+                    <td>Brand</td>
+                    <td>Model</td>
+                    <td>Color</td>
+                    <td>Size</td>
+                    <td>Description</td>
+                    <td>Quantity</td>
+                    <td>Price</td>
+                    <td colspan="2">Actions</td>
+            </tr>
             <c:forEach items="${listOfProduct}" var="p">
                 <c:url var="deleteLink" value="/product/delete">
                     <c:param name="productId" value="${p.pcode}"/> 
