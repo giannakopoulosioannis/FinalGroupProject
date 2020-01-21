@@ -265,7 +265,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="">
-                                                <h3><a href="#" class=""> ${fn:toUpperCase(p.pcategory)} ${p.psubcat} </a></h3>
+                                                <h3><a href="#" class=""> ${fn:toUpperCase(fn:substring(p.pcategory, 0, 1))}${fn:toLowerCase(fn:substring(p.pcategory, 1, -1))} ${p.psubcat} </a></h3>
 
                                                 <p> ${p.pdescr2} 
                                                     </p>
