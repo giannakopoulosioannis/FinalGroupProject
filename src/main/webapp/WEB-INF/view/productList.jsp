@@ -33,7 +33,6 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <security:authorize access="!hasRole('USER') and !hasRole('ADMIN')">
 
                                 <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
 
@@ -394,41 +393,5 @@
 
         </script>
 
-
-
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-
-
-
-        <script>
-            $(document).ready(function () {
-                $('#searchAll').keyup(function () {
-                    let entry = $(this).val();
-                    $('.product_item').hide();
-                    $('.product_item:contains("' + entry + '")').show();
-                });
-                const priceSlider = $("#priceSlider");
-                priceSlider.on("change", (e) => {
-
-                    $("#volume").text(e.target.value);
-                    let volume = $("#volume").text();
-                    console.log(volume);
-
-                    $(".product_item .productPrice").filter(function () {
-                        console.log(parseInt($(this).text()));
-                        $(".product_item").each(function () {
-
-                            while (parseInt($(".productPrice").text() > 100)) {
-                                $(".product_item").hide();
-
-                            }
-                        });
-                    });
-                });
-            });
-
-
-        </script>
-
-    </body>
+   </body>
 </html>

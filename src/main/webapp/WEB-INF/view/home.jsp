@@ -90,13 +90,9 @@
                             <input type="submit" class="fa fa-search" value="&#xf002">
                         </form:form>
                     </div>
-
-
                 </div>
-
                 <div id="select-categ" class="row categ">
                     <p class="subtitle">Categories</p>
-
                     <ul>
                      <li><a id="men" href="#">MEN</a>
                             <ul>
@@ -127,20 +123,19 @@
                 </div>
             </div>
         </div>
-
         <div id="footer" class="">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
                         <p class="copyright">&copy; 2020</p>
                     </div>
+
                     <a href="${pageContext.request.contextPath}/chat">Chat</a>
 
                     <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
                         <div class="col-md-4">
                             <div class="credits">
                                 <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
-
                             </div>
                         </div>
                     </security:authorize>
@@ -151,15 +146,11 @@
                             </div>
                         </div>
                     </security:authorize>
-
                 </div>
             </div>
         </div>
-
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="${path}/static/js/bootstrap.min.js"></script>
-
-      
 
         <script>
             $("#adidas").on('click', function (id) {
@@ -204,10 +195,10 @@
             $("#skechers").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
-
             $("#men").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
+
             $("#women").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
@@ -280,8 +271,6 @@
                 location.href = '${path}/product/kids?category=' + data;
             });
 
-
         </script>
-
     </body>
 </html>
