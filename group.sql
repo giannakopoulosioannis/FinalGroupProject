@@ -10,9 +10,9 @@ pdescr varchar(45) not null,
 pgender varchar (25) not null,
 pquant int unsigned not null,
 pprice decimal(7,2) unsigned default 0,
-purl varchar (500) not null,
-pcreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-pupdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+purl varchar (500) ,
+ pcreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ pupdated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 drop table product;
 insert into product values
@@ -70,12 +70,13 @@ select * from message;
 
 
 --  den to exw treksei --
-  create table inventory(
-icode int unsigned primary key auto_increment,
-iquant int unsigned default 0,
-pcode int unsigned null,
-constraint fk_inventory foreign key (pcode)
-references product (pcode) 
+  create table orders(
+ocode int unsigned primary key auto_increment,
+oquant int unsigned default 0,
+ototal int unsigned default 0,
+puid int ,
+constraint fk_inventory foreign key (puid)
+references user (uid) 
 );
 
 
