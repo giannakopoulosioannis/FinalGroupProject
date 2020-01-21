@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -25,8 +27,13 @@
             <form:errors path="mtext" cssClass="error"/> 
             <br>
             
-            Username: <form:input path="musername"/>
+        <%--<security:authorize access="isAuthenticated()">--%>
+            <%--<security:authentication property="principal.username" />--%>
+             <%--</security:authorize>--%>
+            Username: <form:input   path="musername" />
             <form:errors path="musername" cssClass="error"/>
+       
+
             <br>
             <input type="submit" value="Submit">            
         </form:form>

@@ -32,15 +32,16 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
+<!--                                   <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
 
-                            <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>
+                            <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>-->
 
                             <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
                                 <li>
                                     <i class="fas fa-shopping-cart"></i>
-                                    <strong>0</strong> <br>
-                                    <span class="shopping">Total: <span id="total">0</span></span>
+                                    <strong id="num">0</strong> <br>
+                                    <span class="shopping" id="total">Total: <span id="total">0</span></span>
+                                    <a href="${pageContext.request.contextPath}/checkout">Checkout</a>
                                 </li>
 
                                 <li> <form:form action="${pageContext.request.contextPath}/logout" method="POST">
@@ -59,10 +60,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
+
                         <div class="card">
                             <div class="filter-group">
                                 <h4 class="title">Product type</h4>
-                                <div class="filter-content show" id="">
+                                <div class="filter-content show" id="f">
                                     <div class="card-body">
                                         <form>
                                             <div class="input-group">
@@ -81,45 +83,45 @@
                             </div>
                             <div class="filter-group">
                                 <h4 class="title">Brands</h4>
-                                <div class="filter-content show" id="">
+                                <div class="filter-content show" id="ff">
                                     <div class="card-body">
-                                        <input type="checkbox" name="" value="Adidas">
+                                        <input type="checkbox" name="a" value="Adidas">
                                         <label>Adidas</label>
-                                        <input type="checkbox" name="" value="Asics">
+                                        <input type="checkbox" name="b" value="Asics">
                                         <label>Asics</label>
-                                        <input type="checkbox" name="" value="Champion">
+                                        <input type="checkbox" name="c" value="Champion">
                                         <label>Champion</label>
-                                        <input type="checkbox" name="" value="Converse">
+                                        <input type="checkbox" name="d" value="Converse">
                                         <label>Converse</label>
-                                        <input type="checkbox" name="" value="Fila">
+                                        <input type="checkbox" name="e" value="Fila">
                                         <label>Fila</label>
-                                        <input type="checkbox" name="" value="Lacoste">
+                                        <input type="checkbox" name="f" value="Lacoste">
                                         <label>Lacoste</label>
-                                        <input type="checkbox" name="" value="Lotto">
+                                        <input type="checkbox" name="g" value="Lotto">
                                         <label>Lotto</label>
-                                        <input type="checkbox" name="" value="McKinley">
+                                        <input type="checkbox" name="h" value="McKinley">
                                         <label>McKinley</label>
-                                        <input type="checkbox" name="" value="NewBalance">
+                                        <input type="checkbox" name="i" value="NewBalance">
                                         <label>NewBalance</label>
-                                        <input type="checkbox" name="" value="Nike">
+                                        <input type="checkbox" name="j" value="Nike">
                                         <label>Nike</label>
-                                        <input type="checkbox" name="" value="Oneil">
+                                        <input type="checkbox" name="k" value="Oneil">
                                         <label>Oneil</label>
-                                        <input type="checkbox" name="" value="Puma">
+                                        <input type="checkbox" name="l" value="Puma">
                                         <label>Puma</label>
-                                        <input type="checkbox" name="" value="Reebok">
+                                        <input type="checkbox" name="m" value="Reebok">
                                         <label>Reebok</label>
-                                        <input type="checkbox" name="" value="Skechers">
+                                        <input type="checkbox" name="n" value="Skechers">
                                         <label>Skechers</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="filter-group">
                                 <h4 class="title">Price range</h4>
-                                <div class="filter-content show" id="">
+                                <div class="filter-content show" id="pp">
                                     <div class="card-body">
                                         <div class="input-group ">
-                                            <input id="priceSlider" type="range" name="" max="200">
+                                            <input id="priceSlider" type="range" name="slider" max="200">
                                             <label for="priceSlider" >
                                                 <span >Max &euro;</span>
                                                 <span id="volume">200</span>
@@ -130,7 +132,7 @@
                             </div>
                             <div class="filter-group">
                                 <h4 class="title">Sizes</h4>
-                                <div class="filter-content show" id="">
+                                <div class="filter-content show" id="size">
                                     <div class="card-body">
                                         <label class="checkbox-btn">
                                             <input type="checkbox">
@@ -193,62 +195,74 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="">
-                                            <p >€ <span class="productPrice">${p.pprice}</span></p>
-                                            <button class="btn btn-primary btn-block"> Add to Cart </button>
+                                            <p>€ <span class="productPrice">${p.pprice}</span></p>
+                                                <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+                                                <button id="AddToCart" onclick="addToCart(${p.pcode})">add to cart </button>
+                                                </security:authorize>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </c:forEach>
+
                 </div>
         </main>
-        <footer>
-            <div id="footer" class="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <p class="copyright">&copy; 2020</p>
-                        </div>
-                        <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-                            <div class="col-md-4">
-                                <div class="credits">
-                                    <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
-                                    <a href="${pageContext.request.contextPath}/chat">Chat</a>
-
+        <!--        <footer>
+                    <div id="footer" class="">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p class="copyright">&copy; 2020</p>
                                 </div>
-                            </div>
-                        </security:authorize>
-                        <security:authorize access="hasRole('ADMIN')">
-                            <div class="col-md-4">
-                                <div class="credits">
-                                    <a href="${pageContext.request.contextPath}/admin">Admin</a>
-                                </div>
-                            </div>
-                        </security:authorize>
-
-                    </div>
+        <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+            <div class="col-md-4">
+                <div class="credits">
+                    <a href="${pageContext.request.contextPath}/message/send" >Contact</a>
+                    <a href="${pageContext.request.contextPath}/chat">Chat</a>
+    
                 </div>
             </div>
-        </footer>
+        </security:authorize>
+        <security:authorize access="hasRole('ADMIN')">
+            <div class="col-md-4">
+                <div class="credits">
+                    <a href="${pageContext.request.contextPath}/admin">Admin</a>
+                </div>
+            </div>
+        </security:authorize>
+    
+    </div>
+    </div>
+    </div>
+    </footer>-->
+        <script>
+            var num = 0;
+            var total=0;
+            function addToCart(productId) {
+                $.post("/GroupProject/add/cart/" + productId,
+                        function (data, status) {
+                            console.log(status)
+                            if (status == "success" ) {
+                                num += 1
+                                alert("Success");
+                                $("#num").text(num);
+                                $("#total").text("Total: "+data);
+                            } else {
+                                alert("Please retry");
+                            }
+                        });
+            }
+        </script>
+
+
+
+
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="${path}/static/js/bootstrap.min.js"></script>
 
-        <!--<h1>welcome</h1>-->
-        <%--<security:authorize access="hasRole('ADMIN')">--%>
-            <!--<a href="${pageContext.request.contextPath}/admin">Admin page</a>--> 
-        <%--</security:authorize>--%>
-        <!--<br>-->
-        <!--<a href="${pageContext.request.contextPath}/product/list">Shoes</a>-->
-        <!--<br>-->
-        <%--<security:authorize access="hasRole('USER')">--%> 
-            <!--<a href="${pageContext.request.contextPath}/user">User page</a>--> 
-        <%--</security:authorize>--%>
-        <!--<hr>-->
-        <%--<form:form action="${pageContext.request.contextPath}/logout" method="POST">--%>
-        <!--<input type="submit" value="Logout">-->
 
-        <%--</form:form>--%>
 
         <script>
             $(document).ready(function () {
@@ -267,47 +281,47 @@
                     $(".product_item .productPrice").filter(function () {
                         console.log(parseInt($(this).text()));
                         $(".product_item").each(function () {
-                            
+
                             while (parseInt($(".productPrice").text() > 100)) {
                                 $(".product_item").hide();
-                                
+
                             }
                         });
                     });
                 });
             });
-//                    $("#volume").text(e.target.value);
-//                    let volume = $("#volume").text();
-//                    let price = $("productPrice").text();
-//                    if (price >= volume) { //2000 is the amount where you want the event to trigger
-//                        $('.product_item').hide();
-//                    } else {
-//                        $('.product_item').show();
-//                    }
+            //                    $("#volume").text(e.target.value);
+            //                    let volume = $("#volume").text();
+            //                    let price = $("productPrice").text();
+            //                    if (price >= volume) { //2000 is the amount where you want the event to trigger
+            //                        $('.product_item').hide();
+            //                    } else {
+            //                        $('.product_item').show();
+            //                    }
 
-//                    $(".product_item").each(function () {
-//                        
-//                    $(".productPrice").each(function () {
-//                        let price = $(".productPrice").html();
-//                        
-//                        console.log(price);
-////                        let volume = $("#volume").text();
-////                        console.log(price-volume);
-//                        
-////                        if ((price - volume) < 0){
-////                            $(this).hide();
-////                        }else{
-////                            $(this).show();
-////                        }
-//                         });
-//                    });
-
-
-
-//                        
+            //                    $(".product_item").each(function () {
+            //                        
+            //                    $(".productPrice").each(function () {
+            //                        let price = $(".productPrice").html();
+            //                        
+            //                        console.log(price);
+            ////                        let volume = $("#volume").text();
+            ////                        console.log(price-volume);
+            //                        
+            ////                        if ((price - volume) < 0){
+            ////                            $(this).hide();
+            ////                        }else{
+            ////                            $(this).show();
+            ////                        }
+            //                         });
+            //                    });
 
 
-//                    
+
+            //                        
+
+
+            //                    
 
 
 

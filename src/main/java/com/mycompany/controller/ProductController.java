@@ -26,7 +26,7 @@ public class ProductController {
     public String showProducts( Model m ) {
         List<Product> list = service.getAllProducts();
         m.addAttribute("listOfProduct", list);
-        return "productList";
+        return "listProduct";
     }
     
 
@@ -67,14 +67,14 @@ public class ProductController {
         }
         return "productList";
     }
-    
-    @GetMapping("/search/{pgender}")
-    public String showProductsByGender(
-            @PathVariable("pgender") String pgender,
-            @RequestParam("searchCriteria") String searchCriteria, Model m){
-        List<Product> list = service.findProductsByGender(searchCriteria, pgender);
-        m.addAttribute("listOfProduct", list);
-        m.addAttribute("pgender", pgender);
-        return "listProduct";
-    }
+//    
+//    @GetMapping("/search/{pgender}")
+//    public String showProductsByGender(
+//            @PathVariable("pgender") String pgender,
+//            @RequestParam("searchCriteria") String searchCriteria, Model m){
+//        List<Product> list = service.findProductsByGender(searchCriteria, pgender);
+//        m.addAttribute("listOfProduct", list);
+//        m.addAttribute("pgender", pgender);
+//        return "productList";
+//    }
 }
