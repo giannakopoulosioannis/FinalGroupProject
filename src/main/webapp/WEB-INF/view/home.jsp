@@ -12,7 +12,7 @@
         <title>Home Page</title>
 
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
         <link href="${path}/static/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="${path}/static/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
@@ -47,10 +47,9 @@
                             </security:authorize>
 
                         <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-                            <li class="padding_li_nav">
-                                <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                                    <button type="submit" >Logout <i class="fas fa-sign-out-alt"></i></button>
-                                </form:form>
+                            <li class="padding_li_nav"> <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                    <button type="submit">Logout  <i class="fas fa-sign-out-alt"></i></button>
+                                    </form:form>
                             </li>
                         </security:authorize>
                     </ul>
@@ -95,7 +94,7 @@
                 <div id="select-categ" class="row categ">
                     <p class="subtitle">Categories</p>
                     <ul>
-                        <li><a id="men" href="#">MEN</a>
+                     <li><a id="men" href="#">MEN</a>
                             <ul>
                                 <li><a id="menLifestyle" href="#">Lifestyle</a></li>
                                 <li><a id="menRunning" href="#">Running</a></li>
@@ -119,7 +118,7 @@
                                 <li><a id="kidsFootball" href="#">Football</a></li>
                                 <li><a id="kidsBasketball" href="#">Basketball</a></li>
                             </ul>
-                        </li>
+                        </li>  
                     </ul>
                 </div>
             </div>
@@ -128,9 +127,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <p class="copyright">&copy; Copyright 2020 All rights reserved</p>
+                        <p class="copyright">&copy; 2020</p>
                     </div>
-                <a href="${pageContext.request.contextPath}/chat">Chat</a>
+
+                    <a href="${pageContext.request.contextPath}/chat">Chat</a>
+
                     <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
                         <div class="col-md-4">
                             <div class="credits">
@@ -150,20 +151,7 @@
         </div>
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="${path}/static/js/bootstrap.min.js"></script>
-        <!--<h1>welcome</h1>-->
-        <%--<security:authorize access="hasRole('ADMIN')">--%>
-            <!--<a href="${pageContext.request.contextPath}/admin">Admin page</a>--> 
-        <%--</security:authorize>--%>
-        <!--<br>-->
-        <!--<a href="${pageContext.request.contextPath}/product/list">Shoes</a>-->
-        <!--<br>-->
-        <%--<security:authorize access="hasRole('USER')">--%> 
-            <!--<a href="${pageContext.request.contextPath}/user">User page</a>--> 
-        <%--</security:authorize>--%>
-        <!--<hr>-->
-        <%--<form:form action="${pageContext.request.contextPath}/logout" method="POST">--%>
-        <!--<input type="submit" value="Logout">-->
-        <%--</form:form>--%>
+
         <script>
             $("#adidas").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
@@ -210,10 +198,7 @@
             $("#men").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
-<<<<<<< HEAD
-=======
 
->>>>>>> upstream/master
             $("#women").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
@@ -285,6 +270,7 @@
                 let data = this.innerText.toLowerCase();
                 location.href = '${path}/product/kids?category=' + data;
             });
+
         </script>
     </body>
 </html>

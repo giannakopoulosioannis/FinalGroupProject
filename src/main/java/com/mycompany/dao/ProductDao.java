@@ -24,8 +24,9 @@ public interface ProductDao {
 
     public List<Product> findByUserCriteria(String searchCriteria);
 
-    public List<Product> findByGender(String pgender, String pdescr);
-
+    public List<Product> findByGender(String searchCriteria, String pgender);
+    
+    
     public List<Product> findForMen(String category);
 
     public List<Product> findForWomen(String category);

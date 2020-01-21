@@ -67,24 +67,25 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> findByGender(String pgender, String pdescr) {
+    public List<Product> findByGender(String searchCriteria, String pgender) {
         
-        Query q = getSession().createNativeQuery("SELECT * FROM product WHERE pgender='"+pgender+"'AND pdescr='"+pdescr+"'");
-//        q.setParameter("pgender", pgender);
-//        q.setParameter("pdescr", pdescr);
-        List<Product> list = q.getResultList();
-        return list;
+        if (searchCriteria == "") {
+            return new ArrayList<Product>();
+        } else {
+            Query q = getSession().createNativeQuery("SELECT * FROM product where pgender='"+pgender+"' && pdescr ='" + searchCriteria+"'");
+            
+            List<Product> list = q.getResultList();
+            return list;
+        }
     }
-
-    @Override
+    
+      @Override
     public List<Product> findForMen(String category) {
             Query q = getSession().createQuery(
 //                    "SELECT * FROM product WHERE pgender = 'men' && pdescr ='" + searchCriteria +"'"
                     "SELECT p FROM Product p WHERE p.pgender = :gender AND p.pdescr = :pdescr"
             );
-//            q.setParameter("pcat", "%" + searchCriteria + "%");
-//            q.setParameter("psubcat", "%" + searchCriteria + "%");
-//            q.setParameter("pdescr", "%" + searchCriteria + "%");
+
             q.setParameter("gender", "men");
             q.setParameter("pdescr", category);
             List<Product> list = q.getResultList();

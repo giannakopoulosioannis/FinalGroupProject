@@ -15,7 +15,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Message Page</title>
+        <style>
+            body{
+                text-align: center;
+            }
+             
+        </style>
     </head>
+    
     <body>
         <form:form 
             action="${pageContext.request.contextPath}/message/send" 
@@ -23,17 +30,10 @@
             modelAttribute="message">
             <form:hidden path="mid"/>
             Message: <form:textarea path="mtext"/>
-
             <form:errors path="mtext" cssClass="error"/> 
             <br>
-            
-        <%--<security:authorize access="isAuthenticated()">--%>
-            <%--<security:authentication property="principal.username" />--%>
-             <%--</security:authorize>--%>
             Username: <form:input   path="musername" />
             <form:errors path="musername" cssClass="error"/>
-       
-
             <br>
             <input type="submit" value="Submit">            
         </form:form>
