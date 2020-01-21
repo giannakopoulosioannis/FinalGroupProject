@@ -76,4 +76,8 @@
                 </table>
                 <a href="${pageContext.request.contextPath}/">Home Page</a>
                 </body>
+<<<<<<< HEAD
                 </html>
+=======
+                </html>
+>>>>>>> upstream/master

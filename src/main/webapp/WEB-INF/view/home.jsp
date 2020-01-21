@@ -210,6 +210,10 @@
             $("#men").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
             $("#women").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });

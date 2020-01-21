@@ -393,6 +393,10 @@
                                                             $(".product_item .productPrice").filter(function () {
 //                        console.log(parseInt($(this).text()));
                                                                 $(".product_item").each(function () {
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
                                                                     while (parseInt($(".productPrice").text() > 100)) {
                                                                         $(".product_item").hide();
                                                                     }
@@ -424,6 +428,11 @@
 ////                        }
 //                         });
 //                    });
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> upstream/master
         </script>
 
     </body>
