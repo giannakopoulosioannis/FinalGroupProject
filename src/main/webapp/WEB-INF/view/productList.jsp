@@ -9,10 +9,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home Page</title>
-
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
         <link href="${path}/static/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="${path}/static/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="${path}/static/css/style.css" type="text/css" />
@@ -38,15 +37,22 @@
 
                             <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
                                 <li>
-                                    <i class="fas fa-shopping-cart"></i>
-                                    <strong>0</strong> <br>
-                                    <span class="shopping">Total: <span id="total">0</span></span>
+                                    <a href="#">Shopping cart 
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <strong>0</strong>
+                                    </a>
                                 </li>
-
-                                <li> <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                                        <input type="submit" value="Logout">
-                                    </form:form></li>
-                                </security:authorize>
+                                <li class="padding_li_nav">
+                                    <span class="shopping">Total: 
+                                        <span id="total">0</span>
+                                    </span>
+                                </li>
+                                <li class="padding_li_nav">
+                                    <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                        <button type="submit" >Logout <i class="fas fa-sign-out-alt"></i></button>
+                                        </form:form>
+                                </li>
+                            </security:authorize>
                         </ul>
                     </div>
                 </div>
@@ -64,18 +70,49 @@
                                 <h4 class="title">Product type</h4>
                                 <div class="filter-content show" id="">
                                     <div class="card-body">
-                                        <form>
+                                        <form:form action="${path}/product/search" method="GET">
                                             <div class="input-group">
                                                 <input id="searchAll" type="text" name="searchCriteria" placeholder="Search" size="10">
                                                 <input type="submit" class="fa fa-search" value="&#xf002">
                                             </div>
-                                        </form>
-                                        <ul class="list-menu">
-                                            <li><a href="#">Men  </a></li>
-                                            <li><a href="#">Women </a></li>
-                                            <li><a href="#">KIds  </a></li>
+                                        </form:form>
+                                        <ul class="list-menu" id="accordion">
+                                            <li>
+                                                <h4 id="men" onclick="showHide('subcat_men')">Men 
+                                                    <i class="fas fa-angle-down"></i>
+                                                </h4>
+                                                <ul id="subcat_men" style="display: none;">
+                                                    <li><a href="${path}/product/men?category=lifestyle">Lifestyle </a></li>
+                                                    <li><a href="${path}/product/men?category=running">Running  </a></li>
+                                                    <li><a href="${path}/product/men?category=football">Football </a></li>
+                                                    <li><a href="${path}/product/men?category=basketball">Basketball </a></li>
+                                                    <li><a href="${path}/product/men?category=crossfit">Crossfit  </a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <h4 id="women" onclick="showHide('subcat_women')">Women 
+                                                    <i class="fas fa-angle-down"></i>
+                                                </h4>
+                                                <ul id="subcat_women" style="display: none;">
+                                                    <li><a href="${path}/product/women?category=lifestyle">Lifestyle </a></li>
+                                                    <li><a href="${path}/product/women?category=running">Running  </a></li>
+                                                    <li><a href="${path}/product/women?category=sport">Sport </a></li>
+                                                    <li><a href="${path}/product/women?category=crossfit">Crossfit  </a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <h4 id="kids" onclick="showHide('subcat_kids')">Kids 
+                                                    <i class="fas fa-angle-down"></i>
+                                                </h4>
+                                                <ul id="subcat_kids" style="display: none;">
+                                                    <li><a href="${path}/product/kids?category=lifestyle">Lifestyle </a></li>
+                                                    <li><a href="${path}/product/kids?category=running">Running  </a></li>
+                                                    <li><a href="${path}/product/kids?category=football">Football </a></li>
+                                                    <li><a href="${path}/product/kids?category=basketball">Basketball </a></li>
+                                                </ul>
+                                            </li>
                                         </ul>
-
+                                        <hr />
                                     </div>
                                 </div>
                             </div>
@@ -83,37 +120,38 @@
                                 <h4 class="title">Brands</h4>
                                 <div class="filter-content show" id="">
                                     <div class="card-body">
-                                        <input type="checkbox" name="" value="Adidas">
-                                        <label>Adidas</label>
-                                        <input type="checkbox" name="" value="Asics">
-                                        <label>Asics</label>
-                                        <input type="checkbox" name="" value="Champion">
-                                        <label>Champion</label>
-                                        <input type="checkbox" name="" value="Converse">
-                                        <label>Converse</label>
-                                        <input type="checkbox" name="" value="Fila">
-                                        <label>Fila</label>
-                                        <input type="checkbox" name="" value="Lacoste">
-                                        <label>Lacoste</label>
-                                        <input type="checkbox" name="" value="Lotto">
-                                        <label>Lotto</label>
-                                        <input type="checkbox" name="" value="McKinley">
-                                        <label>McKinley</label>
-                                        <input type="checkbox" name="" value="NewBalance">
-                                        <label>NewBalance</label>
-                                        <input type="checkbox" name="" value="Nike">
-                                        <label>Nike</label>
-                                        <input type="checkbox" name="" value="Oneil">
-                                        <label>Oneil</label>
-                                        <input type="checkbox" name="" value="Puma">
-                                        <label>Puma</label>
-                                        <input type="checkbox" name="" value="Reebok">
-                                        <label>Reebok</label>
-                                        <input type="checkbox" name="" value="Skechers">
-                                        <label>Skechers</label>
+                                        <input id="adidas" type="checkbox" name="brand" value="adidas">
+                                        <label class="label_check">Adidas</label>
+                                        <input id="asics" type="checkbox" name="brand" value="asics">
+                                        <label class="label_check">Asics</label><br />
+                                        <input id="champion" type="checkbox" name="brand" value="champion">
+                                        <label class="label_check">Champion</label>
+                                        <input id="converse" type="checkbox" name="brand" value="converse">
+                                        <label class="label_check">Converse</label><br />
+                                        <input id="fila" type="checkbox" name="brand" value="fila">
+                                        <label class="label_check">Fila</label>
+                                        <input id="lacoste" type="checkbox" name="brand" value="lacoste">
+                                        <label class="label_check">Lacoste</label><br />
+                                        <input id="lotto" type="checkbox" name="brand" value="lotto">
+                                        <label class="label_check">Lotto</label>
+                                        <input id="mcKinley" type="checkbox" name="brand" value="mckinley">
+                                        <label class="label_check">McKinley</label><br />
+                                        <input id="newBalance" type="checkbox" name="brand" value="newbalance">
+                                        <label class="label_check">NewBalance</label>
+                                        <input id="nike" type="checkbox" name="brand" value="nike">
+                                        <label class="label_check">Nike</label><br />
+                                        <input id="oneil" type="checkbox" name="brand" value="oneil">
+                                        <label class="label_check">Oneil</label>
+                                        <input id="puma" type="checkbox" name="brand" value="puma">
+                                        <label class="label_check">Puma</label><br />
+                                        <input id="reebok" type="checkbox" name="brand" value="reebok">
+                                        <label class="label_check">Reebok</label>
+                                        <input id="skechers" type="checkbox" name="brand" value="skechers">
+                                        <label class="label_check">Skechers</label>
                                     </div>
                                 </div>
                             </div>
+                            <hr />
                             <div class="filter-group">
                                 <h4 class="title">Price range</h4>
                                 <div class="filter-content show" id="">
@@ -128,45 +166,78 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr />
                             <div class="filter-group">
                                 <h4 class="title">Sizes</h4>
-                                <div class="filter-content show" id="">
+                                <div class="filter-content show" id="size_filters">
                                     <div class="card-body">
                                         <label class="checkbox-btn">
-                                            <input type="checkbox">
-                                            <span class="btn btn-light"> 38 </span>
+                                            <input type="checkbox" name="size" value="30">
+                                            <span class="btn btn-light">30</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input type="checkbox">
-                                            <span class="btn btn-light"> 39 </span>
+                                            <input type="checkbox" name="size" value="31">
+                                            <span class="btn btn-light">31</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input type="checkbox">
-                                            <span class="btn btn-light"> 40 </span>
+                                            <input type="checkbox" name="size" value="32">
+                                            <span class="btn btn-light">32</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input type="checkbox">
-                                            <span class="btn btn-light"> 41 </span>
+                                            <input type="checkbox" name="size" value="33">
+                                            <span class="btn btn-light">33</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input type="checkbox">
-                                            <span class="btn btn-light"> 42 </span>
+                                            <input type="checkbox" name="size" value="34">
+                                            <span class="btn btn-light">34</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input type="checkbox">
-                                            <span class="btn btn-light"> 43 </span>
+                                            <input type="checkbox" name="size" value="35">
+                                            <span class="btn btn-light">35</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input class="checkFilter" type="checkbox" value="44">
-                                            <span class="btn btn-light"> 44 </span>
+                                            <input type="checkbox"name="size" value="36">
+                                            <span class="btn btn-light">36</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input type="checkbox">
-                                            <span class="btn btn-light"> 45 </span>
+                                            <input type="checkbox" name="size" value="37">
+                                            <span class="btn btn-light">37</span>
                                         </label>
                                         <label class="checkbox-btn">
-                                            <input type="checkbox">
-                                            <span class="btn btn-light"> 46 </span>
+                                            <input type="checkbox" name="size" value="38">
+                                            <span class="btn btn-light">38</span>
+                                        </label>
+                                        <label class="checkbox-btn">
+                                            <input type="checkbox" name="size" value="39">
+                                            <span class="btn btn-light">39</span>
+                                        </label>
+                                        <label class="checkbox-btn">
+                                            <input type="checkbox" name="size" value="40">
+                                            <span class="btn btn-light">40</span>
+                                        </label>
+                                        <label class="checkbox-btn">
+                                            <input type="checkbox" name="size" value="41">
+                                            <span class="btn btn-light">41</span>
+                                        </label>
+                                        <label class="checkbox-btn">
+                                            <input type="checkbox" name="size" value="42">
+                                            <span class="btn btn-light">42</span>
+                                        </label>
+                                        <label class="checkbox-btn">
+                                            <input type="checkbox" name="size" value="43">
+                                            <span class="btn btn-light">43</span>
+                                        </label>
+                                        <label class="checkbox-btn">
+                                            <input type="checkbox" name="size" value="44">
+                                            <span class="btn btn-light">44</span>
+                                        </label>
+                                        <label class="checkbox-btn">
+                                            <input type="checkbox" name="size" value="45">
+                                            <span class="btn btn-light">45</span>
+                                        </label>
+                                        <label class="checkbox-btn">
+                                            <input type="checkbox" name="size" value="46">
+                                            <span class="btn btn-light">46</span>
                                         </label>
                                     </div>
                                 </div>
@@ -174,27 +245,32 @@
                         </div>
                     </div>
                     <c:forEach items="${listOfProduct}" var="p">
-                        <div class="col-md-9 shadow product_item">
-                            <div class="card">
-                                <div class="row product_item_container">
-                                    <div class="col-md-3">
-                                        <a href="#" class="img-wrap">
-                                            <img src="${p.purl}">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="">
-                                            <h3><a href="#" class=""> ${p.pcategory} ${p.psubcat} </a></h3>
-
-                                            <p> ${p.pdescr} Lorem ipsum dolor sit amet, consectetuer adipiscing 
-                                                elit, Ut wisi enim ad minim veniam </p>
-                                            <p>Size ${p.psize}</p>
+                        <div class="products">
+                            <div class="col-md-9 product_item" data-brand="${p.pcategory}" data-size="${p.psize}">
+                                <div class="card">
+                                    <div class="row product_item_container shadow">
+                                        <div class="col-md-3">
+                                            <a href="#" class="img-wrap">
+                                                <img src="${p.purl}">
+                                            </a>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="">
-                                            <p >€ <span class="productPrice">${p.pprice}</span></p>
-                                            <button class="btn btn-primary btn-block"> Add to Cart </button>
+                                        <div class="col-md-6">
+                                            <div class="">
+                                                <h3>
+                                                    <a href="#" class=""> ${p.pcategory} ${p.psubcat} </a>
+                                                </h3>
+                                                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing 
+                                                    elit, Ut wisi enim ad minim veniam </p>
+                                                <p>${p.pdescr}<span class="totheRight">Size ${p.psize}</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="">
+                                                <p >€ <span class="productPrice">${p.pprice}</span></p>
+                                                    <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
+                                                    <button class="btn btn-primary btn-block"> Add to Cart </button>
+                                                </security:authorize>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -231,7 +307,7 @@
                 </div>
             </div>
         </footer>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
         <script src="${path}/static/js/bootstrap.min.js"></script>
 
         <!--<h1>welcome</h1>-->
@@ -251,31 +327,69 @@
         <%--</form:form>--%>
 
         <script>
-            $(document).ready(function () {
-                $('#searchAll').keyup(function () {
-                    let entry = $(this).val();
-                    $('.product_item').hide();
-                    $('.product_item:contains("' + entry + '")').show();
-                });
-                const priceSlider = $("#priceSlider");
-                priceSlider.on("change", (e) => {
 
-                    $("#volume").text(e.target.value);
-                    let volume = $("#volume").text();
-                    console.log(volume);
+                                                    function showHide(id) {
+                                                        let e = document.getElementById(id);
+                                                        if (e.style.display == 'block')
+                                                            e.style.display = 'none';
+                                                        else
+                                                            e.style.display = 'block';
+                                                    }
 
-                    $(".product_item .productPrice").filter(function () {
-                        console.log(parseInt($(this).text()));
-                        $(".product_item").each(function () {
-                            
-                            while (parseInt($(".productPrice").text() > 100)) {
-                                $(".product_item").hide();
-                                
-                            }
-                        });
-                    });
-                });
-            });
+//            $("#women").on('click', function (id) {
+//                location.href = '${path}/product/search?searchCriteria=' + this.id;
+//            });
+//
+//            $("#kids").on('click', function (id) {
+//                location.href = '${path}/product/search?searchCriteria=' + this.id;
+//            });
+
+                                                    $(document).ready(function () {
+                                                        $('#searchAll').keyup(function () {
+                                                            let entry = $(this).val();
+                                                            $('.product_item').hide();
+                                                            $('.product_item:contains("' + entry + '")').show();
+                                                        });
+
+                                                        $('input[name="brand"]').click(function () {
+                                                            if ($('input[name="brand"]:checked').length > 0) {
+                                                                $('.products >div').hide();
+                                                                $('input[name="brand"]:checked').each(function () {
+                                                                    $('.products >div[data-brand=' + this.value + ']').show();
+                                                                });
+                                                            } else {
+                                                                $('.products >div').show();
+                                                            }
+                                                        });
+
+                                                        $('input[name="size"]').click(function () {
+                                                            if ($('input[name="size"]:checked').length > 0) {
+                                                                $('.products >div').hide();
+                                                                $('input[name="size"]:checked').each(function () {
+                                                                    $('.products >div[data-size=' + this.value + ']').show();
+                                                                });
+                                                            } else {
+                                                                $('.products >div').show();
+                                                            }
+                                                        });
+
+                                                        const priceSlider = $("#priceSlider");
+                                                        priceSlider.on("change", (e) => {
+                                                            $("#volume").text(e.target.value);
+                                                            let volume = $("#volume").text();
+//                    console.log(volume);
+                                                            $(".product_item .productPrice").filter(function () {
+//                        console.log(parseInt($(this).text()));
+                                                                $(".product_item").each(function () {
+
+                                                                    while (parseInt($(".productPrice").text() > 100)) {
+                                                                        $(".product_item").hide();
+
+                                                                    }
+                                                                });
+                                                            });
+                                                        });
+                                                    });
 //                    $("#volume").text(e.target.value);
 //                    let volume = $("#volume").text();
 //                    let price = $("productPrice").text();
@@ -284,7 +398,6 @@
 //                    } else {
 //                        $('.product_item').show();
 //                    }
-
 //                    $(".product_item").each(function () {
 //                        
 //                    $(".productPrice").each(function () {
@@ -301,16 +414,6 @@
 ////                        }
 //                         });
 //                    });
-
-
-
-//                        
-
-
-//                    
-
-
-
 
         </script>
 

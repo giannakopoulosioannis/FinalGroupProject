@@ -68,13 +68,32 @@ public class ProductController {
         return "productList";
     }
     
-    @GetMapping("/search/{pgender}")
-    public String showProductsByGender(
-            @PathVariable("pgender") String pgender,
-            @RequestParam("searchCriteria") String searchCriteria, Model m){
-        List<Product> list = service.findProductsByGender(searchCriteria, pgender);
+    @GetMapping("/men")
+    public String showProductsForMen(@RequestParam("category") String category, Model m){
+        List<Product> list = service.findProductsForMen(category);
         m.addAttribute("listOfProduct", list);
-        m.addAttribute("pgender", pgender);
-        return "listProduct";
+        
+        return "productList";
+    }
+    
+    @GetMapping("/women")
+    public String showProductsForWomen(@RequestParam("category") String category, Model m){
+        List<Product> list = service.findProductsForWomen(category);
+        m.addAttribute("listOfProduct", list);
+        
+        return "productList";
+    }
+    
+    @GetMapping("/kids")
+    public String showProductsForKids(@RequestParam("category") String category, Model m){
+        List<Product> list = service.findProductsForKids(category);
+        m.addAttribute("listOfProduct", list);
+        
+        return "productList";
+    }
+    
+    @GetMapping("/cart")
+    public String showCart() {
+        return "shoppingCart";
     }
 }

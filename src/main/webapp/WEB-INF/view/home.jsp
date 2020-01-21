@@ -11,7 +11,7 @@
         <title>Home Page</title>
 
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
         <link href="${path}/static/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="${path}/static/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
@@ -34,13 +34,13 @@
                         <li><a href="${pageContext.request.contextPath}/register/showForm">Create account</a></li>
 
                         <li><a href="${pageContext.request.contextPath}/loginPage">Log in</a></li>
-                        <li></li>
-
                         <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
-                            <li> <form:form action="${pageContext.request.contextPath}/logout" method="POST">
-                                    <input type="submit" value="Logout">
-                                </form:form></li>
-                            </security:authorize>
+                            <li class="padding_li_nav">
+                                <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+                                    <button type="submit" >Logout <i class="fas fa-sign-out-alt"></i></button>
+                                </form:form>
+                            </li>
+                        </security:authorize>
                     </ul>
                 </div>
             </div>
@@ -89,27 +89,27 @@
                     <ul>
                         <li><a id="men" href="#">MEN</a>
                             <ul>
-                                <li><a id="lifestyle" href="#">Lifestyle</a></li>
-                                <li><a href="#">Running</a></li>
-                                <li><a href="#">Football</a></li>
-                                <li><a href="#">Basketball</a></li>
-                                <li><a href="#">Crossfit</a></li>
+                                <li><a id="menLifestyle" href="#">Lifestyle</a></li>
+                                <li><a id="menRunning" href="#">Running</a></li>
+                                <li><a id="menFootball" href="#">Football</a></li>
+                                <li><a id="menBasketball" href="#">Basketball</a></li>
+                                <li><a id="menCrossfit" href="#">Crossfit</a></li>
                             </ul>
                         </li>
                         <li><a id="women" href="#">WOMEN</a>
                             <ul>
-                                <li><a href="#">Lifestyle</a></li>
-                                <li><a href="#">Running</a></li>
-                                <li><a href="#">Sport</a></li>
-                                <li><a href="#">Crossfit</a></li>
+                                <li><a id="womenLifestyle" href="#">Lifestyle</a></li>
+                                <li><a id="womenRunning" href="#">Running</a></li>
+                                <li><a id="womenSport" href="#">Sport</a></li>
+                                <li><a id="womenCrossfit" href="#">Crossfit</a></li>
                             </ul>
                         </li>
                         <li><a id="kids" href="#">KIDS</a>
                             <ul>
-                                <li><a href="#">Lifestyle</a></li>
-                                <li><a href="#">Running</a></li>
-                                <li><a href="#">Football</a></li>
-                                <li><a href="#">Basketball</a></li>
+                                <li><a id="kidsLifestyle" href="#">Lifestyle</a></li>
+                                <li><a id="kidsRunning" href="#">Running</a></li>
+                                <li><a id="kidsFootball" href="#">Football</a></li>
+                                <li><a id="kidsBasketball" href="#">Basketball</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -121,7 +121,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <p class="copyright">&copy; 2020</p>
+                        <p class="copyright">&copy; Copyright 2020 All rights reserved</p>
                     </div>
                     <security:authorize access="hasRole('USER') or hasRole('ADMIN')">
                      <div class="col-md-4">
@@ -211,16 +211,77 @@
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
             
-            $("#lifestyle").on('click', function (id) {
-                location.href = '${path}/product/men/?searchCriteria=' + this.id;
-            });
-            
             $("#women").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
             });
             
             $("#kids").on('click', function (id) {
                 location.href = '${path}/product/search?searchCriteria=' + this.id;
+            });           
+            
+            $("#menLifestyle").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/men?category=' + data;
+            });
+            
+            $("#menRunning").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/men?category=' + data;
+            });
+            
+            $("#menFootball").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/men?category=' + data;
+            });
+            
+            $("#menBasketball").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/men?category=' + data;
+            });
+            
+            $("#menCrossfit").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/men?category=' + data;
+            });
+            
+            $("#womenLifestyle").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/women?category=' + data;
+            });
+            
+            $("#womenRunning").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/women?category=' + data;
+            });
+            
+            $("#womenSport").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/women?category=' + data;
+            });
+            
+            $("#womenCrossfit").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/women?category=' + data;
+            });
+            
+            $("#kidsLifestyle").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/kids?category=' + data;
+            });
+            
+            $("#kidsRunning").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/kids?category=' + data;
+            });
+            
+            $("#kidsFootball").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/kids?category=' + data;
+            });
+            
+            $("#kidsBasketball").on('click', function () {
+                let data = this.innerText.toLowerCase();
+                location.href = '${path}/product/kids?category=' + data;
             });
             
         </script>
