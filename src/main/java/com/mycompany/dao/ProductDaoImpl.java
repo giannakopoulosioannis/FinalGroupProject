@@ -85,9 +85,7 @@ public class ProductDaoImpl implements ProductDao {
 //                    "SELECT * FROM product WHERE pgender = 'men' && pdescr ='" + searchCriteria +"'"
                     "SELECT p FROM Product p WHERE p.pgender = :gender AND p.pdescr = :pdescr"
             );
-//            q.setParameter("pcat", "%" + searchCriteria + "%");
-//            q.setParameter("psubcat", "%" + searchCriteria + "%");
-//            q.setParameter("pdescr", "%" + searchCriteria + "%");
+
             q.setParameter("gender", "men");
             q.setParameter("pdescr", category);
             List<Product> list = q.getResultList();

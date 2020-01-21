@@ -2,8 +2,10 @@ package com.mycompany.controller;
 
 import com.mycompany.dao.ProductDao;
 import com.mycompany.entities.OrderDetail;
+import com.mycompany.entities.Orders;
 import com.mycompany.entities.Product;
 import com.mycompany.entities.ProductEditor;
+import com.mycompany.service.OrderHistory;
 import com.mycompany.service.OrderService;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,8 @@ public class OrderController {
     OrderService service;
     @Autowired
     ProductDao productDao;
+  
+
 
     @GetMapping("/products")
     public String showProducts(OrderDetail orderDetail, Model model) {
@@ -60,11 +64,13 @@ public class OrderController {
         productList.add(product);
         System.out.println(productList);
         request.getSession().setAttribute("cart",productList);
-        System.out.println("i am out");
+        
         int total=0;
         for(Product p:productList){
             total+=p.getPprice();
         }
+      
+
         return total;
     }
 

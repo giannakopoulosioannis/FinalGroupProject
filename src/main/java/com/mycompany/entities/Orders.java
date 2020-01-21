@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.entities;
 
 import java.io.Serializable;
@@ -18,12 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
-@Table(name = "orders")
-@XmlRootElement
+@Table
 @NamedQueries({
     @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o")
     , @NamedQuery(name = "Orders.findByOcode", query = "SELECT o FROM Orders o WHERE o.ocode = :ocode")
@@ -31,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Orders.findByOtotal", query = "SELECT o FROM Orders o WHERE o.ototal = :ototal")})
 public class Orders implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -47,6 +41,12 @@ public class Orders implements Serializable {
 
     public Orders() {
     }
+
+    public Orders(Integer oquant, Integer ototal) {
+        this.oquant = oquant;
+        this.ototal = ototal;
+    }
+    
 
     public Orders(Integer ocode) {
         this.ocode = ocode;

@@ -1,7 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <html>
@@ -264,10 +265,10 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="">
-                                                <h3><a href="#" class=""> ${p.pcategory} ${p.psubcat} </a></h3>
+                                                <h3><a href="#" class=""> ${fn:toUpperCase(p.pcategory)} ${p.psubcat} </a></h3>
 
-                                                <p> ${p.pdescr} Lorem ipsum dolor sit amet, consectetuer adipiscing 
-                                                    elit, Ut wisi enim ad minim veniam </p>
+                                                <p> ${p.pdescr2} 
+                                                    </p>
                                                 <p> ${p.pdescr} <span class="totheRight">Size ${p.psize}</span></p>
                                             </div>
                                         </div>
@@ -283,7 +284,6 @@
                                 </div>
                             </div>
                         </div>                         
-
                     </c:forEach>
 
                 </div>
@@ -307,7 +307,7 @@
 
                         </security:authorize>
                         <security:authorize access="hasRole('ADMIN')">
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <div class="credits">
                                     <a href="${pageContext.request.contextPath}/admin">Admin</a>
                                 </div>

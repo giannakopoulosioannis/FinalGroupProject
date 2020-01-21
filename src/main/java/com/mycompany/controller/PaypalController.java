@@ -1,8 +1,10 @@
 package com.mycompany.controller;
 
 import com.mycompany.entities.OrderDetail;
+import com.mycompany.entities.Orders;
 import com.mycompany.entities.Product;
 import com.mycompany.service.OrderHistory;
+import com.mycompany.service.OrderHistoryImpl;
 import com.mycompany.service.OrderService;
 import com.mycompany.service.PaypalService;
 import com.paypal.api.payments.PayerInfo;
@@ -10,6 +12,7 @@ import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.ShippingAddress;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +35,9 @@ public class PaypalController {
     PaypalService service;
     @Autowired
     OrderService orderService;
+//    @Autowired
+//    OrderHistoryImpl historyService;
+   
     
    
 
@@ -105,9 +111,23 @@ public class PaypalController {
             Transaction transaction = payment.getTransactions().get(0);
             model.addAttribute("payer", payerInfo);
             model.addAttribute("transaction", transaction);
-            request.getSession().removeAttribute("cart");
-            
-            
+       
+//        List<Product> productList = (List<Product>) request.getSession().getAttribute("cart");
+//      
+//        System.out.println(productList);
+//        request.getSession().setAttribute("cart",productList);
+//        
+//        int total=0;
+//        for(Product p:productList){
+//            total+=p.getPprice();
+//        }
+//      
+//        Orders ord=new Orders(productList.size(),total);  
+//         historyService.createOrUpdateOrder(ord);
+
+                   
+
+              request.getSession().removeAttribute("cart");
             return "receipt";
         } catch (PayPalRESTException ex) {
             Logger.getLogger(PaypalController.class.getName()).log(Level.SEVERE, null, ex);
